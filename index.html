@@ -71,8 +71,92 @@
     background: var(--bg);
     color: var(--text);
     line-height: 1.7;
+    padding-top: 52px;
   }
   .wrap { max-width: 880px; margin: 0 auto; padding: 0 20px; }
+
+  .topnav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 28px;
+    background: rgba(15,17,21,0.8);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    z-index: 100;
+    overflow-x: auto;
+    padding: 0 16px;
+  }
+  .topnav .brand {
+    color: var(--text);
+    font-weight: 700;
+    text-decoration: none;
+    font-size: 0.95rem;
+    margin-right: 12px;
+    flex: 0 0 auto;
+  }
+  .topnav a {
+    color: var(--text-dim);
+    text-decoration: none;
+    font-size: 0.85rem;
+    white-space: nowrap;
+    transition: color 0.2s ease;
+  }
+  .topnav a:hover { color: var(--text); }
+  .nav-item {
+    position: relative;
+    flex: 0 0 auto;
+    padding: 16px 0;
+  }
+  .dropdown {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-8px);
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 10px;
+    min-width: 190px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    z-index: 110;
+  }
+  .nav-item:hover .dropdown,
+  .nav-item:focus-within .dropdown {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateX(-50%) translateY(0);
+  }
+  .dropdown a {
+    display: block;
+    padding: 9px 10px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+  }
+  .dropdown a:hover { background: rgba(91,140,255,0.12); }
+
+  .page-overlay {
+    position: fixed;
+    top: 52px; left: 0; right: 0; bottom: 0;
+    background: rgba(15,17,21,0.5);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.35s ease;
+    z-index: 40;
+  }
+  .topnav:has(.nav-item:hover) ~ .page-overlay,
+  .topnav:has(.nav-item:focus-within) ~ .page-overlay {
+    opacity: 1;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+
   header.hero {
     padding: 72px 0 56px;
     text-align: center;
@@ -102,7 +186,7 @@
     padding: 6px 14px;
     border-radius: 999px;
   }
-  section { padding: 56px 0; border-bottom: 1px solid var(--border); }
+  section { padding: 56px 0; border-bottom: 1px solid var(--border); scroll-margin-top: 68px; }
   section h2 {
     font-size: 1.5rem;
     margin-bottom: 20px;
@@ -118,6 +202,7 @@
     border: 1px solid var(--border);
     border-radius: 12px;
     padding: 24px;
+    scroll-margin-top: 68px;
   }
   .card h3 { font-size: 1.1rem; margin-bottom: 10px; transition: margin 0.4s ease; }
   .card p { color: var(--text-dim); font-size: 0.95rem; }
@@ -296,6 +381,31 @@
 </head>
 <body>
 
+<nav class="topnav">
+  <a href="#" class="brand">ToyRadar</a>
+  <div class="nav-item">
+    <a href="#categories">品類</a>
+    <div class="dropdown">
+      <a href="#beyblade">Beyblade</a>
+      <a href="#pokemon-tcg">Pokémon TCG</a>
+      <a href="#onepiece-tcg">One Piece TCG</a>
+    </div>
+  </div>
+  <div class="nav-item">
+    <a href="#features">服務內容</a>
+    <div class="dropdown">
+      <a href="#realtime-alerts">即時情報通知</a>
+      <a href="#auto-notify">自動化通知服務</a>
+      <a href="#community">收藏交流社群</a>
+      <a href="#market-insight">市場資訊整合</a>
+    </div>
+  </div>
+  <a href="#about">我們是誰</a>
+  <a href="#pricing">訂閱方案</a>
+  <a href="#faq">FAQ</a>
+</nav>
+<div class="page-overlay"></div>
+
 <header class="hero">
   <div class="wrap">
     <div class="badge-row">
@@ -312,15 +422,15 @@
   <div class="wrap">
     <h2 class="reveal">我們涵蓋的品類</h2>
     <div class="category-grid">
-      <div class="card reveal">
+      <div class="card reveal" id="beyblade">
         <h3>Beyblade</h3>
         <p>Beyblade 新品發售通路分散，各零售商上架時間不一致。ToyRadar 監控庫存變化，第一時間通知上架與到貨消息。</p>
       </div>
-      <div class="card reveal">
+      <div class="card reveal" id="pokemon-tcg">
         <h3>Pokémon TCG</h3>
         <p>Pokemon trading card game 熱門商品經常秒殺完售。ToyRadar 整理 pokémon tcg trading card game 各通路預購資訊，減少錯過的機會。</p>
       </div>
-      <div class="card reveal">
+      <div class="card reveal" id="onepiece-tcg">
         <h3>One Piece TCG</h3>
         <p>One piece trading card game 限量商品常採抽選制。ToyRadar 整理 one piece tcg 各通路的抽選時間與參加方式。</p>
       </div>
@@ -332,19 +442,19 @@
   <div class="wrap">
     <h2 class="reveal">我們的服務內容</h2>
     <div class="feature-list grid-2x2">
-      <div class="card reveal">
+      <div class="card reveal" id="realtime-alerts">
         <h3>🎯 即時情報通知</h3>
         <p>澳洲、台灣及海外通路補貨通知<br>限量商品發售消息<br>預購、抽選、發售資訊整理<br>各大零售商即時庫存監控</p>
       </div>
-      <div class="card reveal">
+      <div class="card reveal" id="auto-notify">
         <h3>🤖 自動化通知服務</h3>
         <p>透過自建機器人系統：<br>即時補貨提醒<br>商品價格變化通知<br>新品上架推播<br>客製化關鍵字追蹤</p>
       </div>
-      <div class="card reveal">
+      <div class="card reveal" id="community">
         <h3>🧸 收藏交流社群</h3>
         <p>分享收藏<br>討論市場資訊<br>交流購買經驗<br>找尋代購與通路情報</p>
       </div>
-      <div class="card reveal">
+      <div class="card reveal" id="market-insight">
         <h3>📈 市場資訊整合</h3>
         <p>熱門玩具<br>寶可夢卡牌<br>潮玩公仔<br>海外通路資訊<br>市場趨勢分析</p>
       </div>
