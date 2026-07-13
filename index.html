@@ -65,6 +65,7 @@
     --border: #262a33;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
   body {
     font-family: -apple-system, BlinkMacSystemFont, "PingFang TC", "Microsoft JhengHei", sans-serif;
     background: var(--bg);
@@ -181,7 +182,6 @@
     font-weight: 600;
     cursor: pointer;
   }
-  form.waitlist button:hover { opacity: 0.9; }
   .faq-item { margin-bottom: 22px; }
   .faq-item h3 { font-size: 1.05rem; margin-bottom: 8px; }
   .faq-item p { color: var(--text-dim); font-size: 0.95rem; }
@@ -191,6 +191,70 @@
     color: var(--text-dim);
     font-size: 0.9rem;
   }
+
+  @media (prefers-reduced-motion: no-preference) {
+    header.hero .badge-row,
+    header.hero h1,
+    header.hero p {
+      opacity: 0;
+      animation: heroIn 0.8s cubic-bezier(0.16,1,0.3,1) forwards;
+    }
+    header.hero .badge-row { animation-delay: 0.05s; }
+    header.hero h1 { animation-delay: 0.2s; }
+    header.hero p { animation-delay: 0.35s; }
+
+    .reveal { opacity: 0; transform: translateY(24px); }
+    .reveal.in-view { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes heroIn {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .card,
+  .pricing-box,
+  .badge,
+  form.waitlist button,
+  form.waitlist input[type="email"],
+  .reveal {
+    transition: all 0.5s cubic-bezier(0.16,1,0.3,1);
+  }
+
+  .card:hover {
+    transform: translateY(-6px);
+    border-color: var(--accent);
+    box-shadow: 0 16px 40px rgba(91,140,255,0.15);
+  }
+
+  .pricing-box:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 40px rgba(91,140,255,0.12);
+  }
+
+  .badge:hover {
+    border-color: var(--accent);
+    color: var(--text);
+  }
+
+  form.waitlist button:hover {
+    transform: translateY(-2px) scale(1.02);
+    opacity: 0.92;
+  }
+
+  form.waitlist button:active {
+    transform: translateY(0) scale(0.97);
+  }
+
+  form.waitlist input[type="email"]:focus {
+    outline: none;
+    border-color: var(--accent);
+  }
+
+  .category-grid .card:nth-child(2),
+  .feature-list .card:nth-child(2) { transition-delay: 0.08s; }
+  .category-grid .card:nth-child(3),
+  .feature-list .card:nth-child(3) { transition-delay: 0.16s; }
 </style>
 </head>
 <body>
@@ -209,17 +273,17 @@
 
 <section id="categories">
   <div class="wrap">
-    <h2>我們涵蓋的品類</h2>
+    <h2 class="reveal">我們涵蓋的品類</h2>
     <div class="category-grid">
-      <div class="card">
+      <div class="card reveal">
         <h3>Beyblade</h3>
         <p>Beyblade 新品發售通路分散，各零售商上架時間不一致。ToyRadar 監控庫存變化，第一時間通知上架與到貨消息。</p>
       </div>
-      <div class="card">
+      <div class="card reveal">
         <h3>Pokémon TCG</h3>
         <p>Pokemon trading card game 熱門商品經常秒殺完售。ToyRadar 整理 pokémon tcg trading card game 各通路預購資訊，減少錯過的機會。</p>
       </div>
-      <div class="card">
+      <div class="card reveal">
         <h3>One Piece TCG</h3>
         <p>One piece trading card game 限量商品常採抽選制。ToyRadar 整理 one piece tcg 各通路的抽選時間與參加方式。</p>
       </div>
@@ -229,17 +293,17 @@
 
 <section id="features">
   <div class="wrap">
-    <h2>三大核心服務</h2>
+    <h2 class="reveal">三大核心服務</h2>
     <div class="feature-list">
-      <div class="card">
+      <div class="card reveal">
         <h3>預購資訊整理</h3>
         <p>各大零售商的預購開賣時間、付款方式一次看，不用自己一個個網站刷。</p>
       </div>
-      <div class="card">
+      <div class="card reveal">
         <h3>抽選情報</h3>
         <p>抽選登記時間、參加方式、公布時間整理清楚，不錯過任何一場抽籤。</p>
       </div>
-      <div class="card">
+      <div class="card reveal">
         <h3>即時庫存監控</h3>
         <p>持續監控各大零售商庫存變化，補貨、上架第一時間通知。</p>
       </div>
@@ -249,8 +313,8 @@
 
 <section id="pricing">
   <div class="wrap">
-    <h2>訂閱方案</h2>
-    <div class="pricing-box">
+    <h2 class="reveal">訂閱方案</h2>
+    <div class="pricing-box reveal">
       <div class="trial-note">30 天免費試用</div>
       <div class="price">AUD $10<span> / 月</span></div>
       <p class="status-note">金流串接規劃中，目前開放留下 email 卡位，正式開放付款訂閱時會第一時間通知你。訂閱完成後即可加入 ToyRadar Discord 群組，享 30 天免費試用。</p>
@@ -267,24 +331,24 @@
 
 <section id="faq">
   <div class="wrap">
-    <h2>常見問題</h2>
+    <h2 class="reveal">常見問題</h2>
 
-    <div class="faq-item">
+    <div class="faq-item reveal">
       <h3>One Piece TCG 抽選是什麼？</h3>
       <p>抽選是零售商常見的限量商品販售方式，消費者先登記參加抽籤，中籤後才能購買。One Piece TCG 熱門商品經常採用抽選制，ToyRadar 會整理各通路的抽選時間與參加方式。</p>
     </div>
 
-    <div class="faq-item">
+    <div class="faq-item reveal">
       <h3>Pokémon TCG 預購要注意什麼？</h3>
       <p>Pokemon TCG 熱門商品預購經常在數分鐘內額滿，建議提前確認開賣時間、付款方式與到貨時間。ToyRadar 會即時整理各大零售商的預購資訊。</p>
     </div>
 
-    <div class="faq-item">
+    <div class="faq-item reveal">
       <h3>Beyblade 新品在哪裡買？</h3>
       <p>Beyblade 新品發售通路分散，官方通路與零售商上架時間常不一致。ToyRadar 監控各大零售商庫存變化，第一時間通知上架與到貨消息。</p>
     </div>
 
-    <div class="faq-item">
+    <div class="faq-item reveal">
       <h3>訂閱後多久可以加入 Discord？</h3>
       <p>完成訂閱後即可加入 ToyRadar 的 Discord 群組，享有 30 天免費試用，試用期間可完整使用情報整理與庫存監控服務。</p>
     </div>
@@ -296,6 +360,26 @@
     <p>ToyRadar © 2026</p>
   </div>
 </footer>
+
+<script>
+(function () {
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var items = document.querySelectorAll('.reveal');
+  if (reduceMotion || !('IntersectionObserver' in window)) {
+    items.forEach(function (el) { el.classList.add('in-view'); });
+    return;
+  }
+  var observer = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in-view');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+  items.forEach(function (el) { observer.observe(el); });
+})();
+</script>
 
 </body>
 </html>
