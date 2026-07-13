@@ -144,6 +144,12 @@
     gap: 20px;
     margin-top: 24px;
   }
+  .grid-2x2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @media (max-width: 560px) {
+    .grid-2x2 { grid-template-columns: 1fr; }
+  }
   .about-intro {
     color: var(--text-dim);
     max-width: 640px;
@@ -325,7 +331,7 @@
 <section id="features">
   <div class="wrap">
     <h2 class="reveal">我們的服務內容</h2>
-    <div class="feature-list">
+    <div class="feature-list grid-2x2">
       <div class="card reveal">
         <h3>🎯 即時情報通知</h3>
         <p>澳洲、台灣及海外通路補貨通知<br>限量商品發售消息<br>預購、抽選、發售資訊整理<br>各大零售商即時庫存監控</p>
