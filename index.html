@@ -276,6 +276,29 @@
     font-size: 0.9rem;
     margin-top: 16px;
   }
+  .discord-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    padding: 13px 28px;
+    border-radius: 8px;
+    background: #5865F2;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.4s cubic-bezier(0.16,1,0.3,1);
+  }
+  .discord-btn:hover {
+    transform: translateY(-2px) scale(1.02);
+    background: #4752c4;
+  }
+  .or-divider {
+    color: var(--text-dim);
+    font-size: 0.85rem;
+    margin: 14px 0;
+  }
   form.waitlist {
     margin-top: 24px;
     display: flex;
@@ -488,7 +511,11 @@
     <div class="pricing-box reveal">
       <div class="trial-note">30 天免費試用</div>
       <div class="price">AUD $10<span> / 月</span></div>
-      <p class="status-note">金流串接規劃中，目前開放留下 email 卡位，正式開放付款訂閱時會第一時間通知你。訂閱完成後即可加入 ToyRadar Discord 群組，享 30 天免費試用。</p>
+      <p class="status-note">金流串接規劃中，正式開放付款訂閱時會第一時間通知你。訂閱完成後即可加入 ToyRadar Discord 群組，享 30 天免費試用。</p>
+
+      <a class="discord-btn" href="https://discord.com/oauth2/authorize?client_id=1519267896516415498&amp;redirect_uri=https%3A%2F%2Ftommy0809449.github.io%2Ftoyradar%2Fcallback.html&amp;response_type=code&amp;scope=identify">使用 Discord 登入訂閱</a>
+
+      <p class="or-divider">或</p>
 
       <form class="waitlist" action="https://formsubmit.co/lucifer880401@gmail.com" method="POST">
         <input type="hidden" name="_subject" content="ToyRadar 候補名單新登記">
