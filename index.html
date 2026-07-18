@@ -57,12 +57,14 @@
 
 <style>
   :root {
-    --bg: #0f1115;
-    --bg-card: #171a21;
-    --text: #e8e9ec;
+    --bg: #0a0b0d;
+    --bg-alt: #101216;
+    --bg-card: #16181e;
+    --text: #f2f3f5;
     --text-dim: #9aa0aa;
     --accent: #5b8cff;
-    --border: #262a33;
+    --accent-2: #8f6bff;
+    --border: #24272f;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
@@ -72,8 +74,9 @@
     color: var(--text);
     line-height: 1.7;
     padding-top: 52px;
+    -webkit-font-smoothing: antialiased;
   }
-  .wrap { max-width: 880px; margin: 0 auto; padding: 0 20px; }
+  .wrap { max-width: 980px; margin: 0 auto; padding: 0 24px; }
 
   .topnav {
     position: fixed;
@@ -82,27 +85,30 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 28px;
-    background: rgba(15,17,21,0.8);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    gap: 30px;
+    background: rgba(10,11,13,0.72);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
     border-bottom: 1px solid var(--border);
     z-index: 100;
-    overflow-x: auto;
     padding: 0 16px;
+  }
+  @media (max-width: 700px) {
+    .topnav { overflow-x: auto; }
   }
   .topnav .brand {
     color: var(--text);
-    font-weight: 700;
+    font-weight: 800;
+    letter-spacing: -0.02em;
     text-decoration: none;
     font-size: 0.95rem;
-    margin-right: 12px;
+    margin-right: 14px;
     flex: 0 0 auto;
   }
   .topnav a {
     color: var(--text-dim);
     text-decoration: none;
-    font-size: 0.85rem;
+    font-size: 0.82rem;
     white-space: nowrap;
     transition: color 0.2s ease;
   }
@@ -119,13 +125,14 @@
     transform: translateX(-50%) translateY(-8px);
     background: var(--bg-card);
     border: 1px solid var(--border);
-    border-radius: 12px;
+    border-radius: 14px;
     padding: 10px;
     min-width: 190px;
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.3s ease, transform 0.3s ease;
     z-index: 110;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
   }
   .nav-item:hover .dropdown,
   .nav-item:focus-within .dropdown {
@@ -136,15 +143,15 @@
   .dropdown a {
     display: block;
     padding: 9px 10px;
-    border-radius: 6px;
+    border-radius: 8px;
     font-size: 0.85rem;
   }
-  .dropdown a:hover { background: rgba(91,140,255,0.12); }
+  .dropdown a:hover { background: rgba(91,140,255,0.12); color: var(--text); }
 
   .page-overlay {
     position: fixed;
     top: 52px; left: 0; right: 0; bottom: 0;
-    background: rgba(15,17,21,0.5);
+    background: rgba(10,11,13,0.5);
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.35s ease;
@@ -158,26 +165,48 @@
   }
 
   header.hero {
-    padding: 72px 0 56px;
+    position: relative;
+    padding: clamp(88px, 16vw, 168px) 0 clamp(64px, 10vw, 110px);
     text-align: center;
-    border-bottom: 1px solid var(--border);
+    overflow: hidden;
   }
+  header.hero::before {
+    content: "";
+    position: absolute;
+    top: -220px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 900px;
+    height: 560px;
+    background:
+      radial-gradient(closest-side, rgba(91,140,255,0.28), transparent),
+      radial-gradient(closest-side, rgba(143,107,255,0.22), transparent);
+    background-position: 30% 50%, 70% 60%;
+    background-repeat: no-repeat;
+    filter: blur(60px);
+    pointer-events: none;
+    z-index: 0;
+  }
+  header.hero .wrap { position: relative; z-index: 1; }
   header.hero h1 {
-    font-size: clamp(1.6rem, 4vw, 2.4rem);
-    margin-bottom: 16px;
+    font-size: clamp(2rem, 5.2vw, 3.6rem);
+    font-weight: 650;
+    letter-spacing: -0.025em;
+    line-height: 1.15;
+    margin-bottom: 20px;
   }
   header.hero p {
     color: var(--text-dim);
-    font-size: 1.05rem;
-    max-width: 560px;
-    margin: 0 auto 28px;
+    font-size: clamp(1rem, 1.6vw, 1.2rem);
+    max-width: 600px;
+    margin: 0 auto 32px;
   }
   .badge-row {
     display: flex;
     justify-content: center;
     gap: 10px;
     flex-wrap: wrap;
-    margin-bottom: 28px;
+    margin-bottom: 32px;
   }
   .badge {
     border: 1px solid var(--border);
@@ -185,49 +214,58 @@
     font-size: 0.85rem;
     padding: 6px 14px;
     border-radius: 999px;
+    background: rgba(255,255,255,0.02);
   }
-  section { padding: 56px 0; border-bottom: 1px solid var(--border); scroll-margin-top: 68px; }
+  section {
+    padding: clamp(64px, 11vw, 140px) 0;
+  }
+  section:nth-of-type(even) { background: var(--bg-alt); }
   section h2 {
-    font-size: 1.5rem;
-    margin-bottom: 20px;
+    font-size: clamp(1.7rem, 3.4vw, 2.6rem);
+    font-weight: 650;
+    letter-spacing: -0.02em;
+    text-align: center;
+    margin-bottom: 48px;
   }
   .category-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 20px;
-    margin-top: 24px;
+    gap: 24px;
   }
   .card {
     background: var(--bg-card);
     border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 24px;
+    border-radius: 20px;
+    padding: clamp(26px, 3vw, 36px);
     scroll-margin-top: 68px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.22);
   }
-  .card h3 { font-size: 1.1rem; margin-bottom: 10px; transition: margin 0.4s ease; }
+  .icon-badge {
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(91,140,255,0.12);
+    margin-bottom: 18px;
+  }
+  .icon-badge svg {
+    width: 24px;
+    height: 24px;
+    stroke: var(--accent);
+    fill: none;
+    stroke-width: 1.6;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .card h3 { font-size: 1.15rem; font-weight: 600; margin-bottom: 10px; }
   .card p { color: var(--text-dim); font-size: 0.95rem; }
 
-  @media (hover: hover) and (pointer: fine) {
-    .card h3 { margin-bottom: 0; }
-    .card p {
-      opacity: 0;
-      max-height: 0;
-      overflow: hidden;
-      transform: translateY(-6px);
-      transition: opacity 0.4s ease, transform 0.4s ease, max-height 0.4s ease;
-    }
-    .card:hover h3 { margin-bottom: 10px; }
-    .card:hover p {
-      opacity: 1;
-      max-height: 220px;
-      transform: translateY(0);
-    }
-  }
   .feature-list {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 20px;
-    margin-top: 24px;
+    gap: 24px;
   }
   .grid-2x2 {
     grid-template-columns: repeat(2, 1fr);
@@ -238,28 +276,33 @@
   .about-intro {
     color: var(--text-dim);
     max-width: 640px;
-    margin: 0 auto 32px;
+    margin: 0 auto 20px;
     text-align: center;
+    font-size: 1.05rem;
   }
+  .about-intro:first-of-type { margin-top: -24px; }
   .about-closing {
     color: var(--text-dim);
     max-width: 560px;
-    margin: 40px auto 0;
+    margin: 44px auto 0;
     text-align: center;
     font-style: italic;
   }
   .pricing-box {
-    background: var(--bg-card);
+    background: linear-gradient(180deg, var(--bg-card), var(--bg-alt));
     border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 36px;
+    border-radius: 24px;
+    padding: clamp(32px, 5vw, 52px);
     text-align: center;
-    margin-top: 24px;
+    max-width: 520px;
+    margin: 0 auto;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
   }
   .price {
-    font-size: 2.4rem;
+    font-size: 2.8rem;
     font-weight: 700;
-    margin: 8px 0;
+    letter-spacing: -0.02em;
+    margin: 10px 0;
   }
   .price span { font-size: 1rem; color: var(--text-dim); font-weight: 400; }
   .trial-note {
@@ -274,30 +317,32 @@
   .status-note {
     color: var(--text-dim);
     font-size: 0.9rem;
-    margin-top: 16px;
+    margin-top: 18px;
   }
   .discord-btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    margin-top: 20px;
-    padding: 13px 28px;
-    border-radius: 8px;
-    background: #5865F2;
+    margin-top: 24px;
+    padding: 15px 34px;
+    border-radius: 999px;
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
     color: #fff;
     text-decoration: none;
     font-weight: 600;
     font-size: 1rem;
+    box-shadow: 0 10px 30px rgba(91,140,255,0.35);
     transition: all 0.4s cubic-bezier(0.16,1,0.3,1);
+    scroll-margin-top: 68px;
   }
   .discord-btn:hover {
     transform: translateY(-2px) scale(1.02);
-    background: #4752c4;
+    box-shadow: 0 14px 36px rgba(91,140,255,0.45);
   }
   .or-divider {
     color: var(--text-dim);
     font-size: 0.85rem;
-    margin: 14px 0;
+    margin: 16px 0;
   }
   form.waitlist {
     margin-top: 24px;
@@ -305,12 +350,13 @@
     gap: 10px;
     flex-wrap: wrap;
     justify-content: center;
+    scroll-margin-top: 68px;
   }
   form.waitlist input[type="email"] {
     flex: 1;
     min-width: 220px;
     padding: 13px 16px;
-    border-radius: 8px;
+    border-radius: 10px;
     border: 1px solid var(--border);
     background: var(--bg);
     color: var(--text);
@@ -318,7 +364,7 @@
   }
   form.waitlist button {
     padding: 13px 24px;
-    border-radius: 8px;
+    border-radius: 10px;
     border: none;
     background: var(--accent);
     color: #fff;
@@ -326,11 +372,18 @@
     font-weight: 600;
     cursor: pointer;
   }
-  .faq-item { margin-bottom: 22px; }
-  .faq-item h3 { font-size: 1.05rem; margin-bottom: 8px; }
+  .faq-item {
+    max-width: 720px;
+    margin: 0 auto 28px;
+    padding-bottom: 28px;
+    border-bottom: 1px solid var(--border);
+    scroll-margin-top: 68px;
+  }
+  .faq-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+  .faq-item h3 { font-size: 1.05rem; font-weight: 600; margin-bottom: 8px; }
   .faq-item p { color: var(--text-dim); font-size: 0.95rem; }
   footer {
-    padding: 40px 0 60px;
+    padding: 48px 0 64px;
     text-align: center;
     color: var(--text-dim);
     font-size: 0.9rem;
@@ -347,8 +400,12 @@
     header.hero h1 { animation-delay: 0.2s; }
     header.hero p { animation-delay: 0.35s; }
 
-    .reveal { opacity: 0; transform: translateY(48px); }
-    .reveal.in-view { opacity: 1; transform: translateY(0); }
+    .reveal { opacity: 0; transform: translateY(24px); }
+    .reveal.in-view {
+      opacity: 1;
+      transform: translateY(0);
+      transition: opacity 0.6s cubic-bezier(0.16,1,0.3,1), transform 0.6s cubic-bezier(0.16,1,0.3,1);
+    }
   }
 
   @keyframes heroIn {
@@ -360,20 +417,18 @@
   .pricing-box,
   .badge,
   form.waitlist button,
-  form.waitlist input[type="email"],
-  .reveal {
-    transition: all 0.5s cubic-bezier(0.16,1,0.3,1);
+  form.waitlist input[type="email"] {
+    transition: all 0.4s cubic-bezier(0.16,1,0.3,1);
   }
 
   .card:hover {
     transform: translateY(-6px);
     border-color: var(--accent);
-    box-shadow: 0 16px 40px rgba(91,140,255,0.15);
+    box-shadow: 0 20px 46px rgba(91,140,255,0.18);
   }
 
   .pricing-box:hover {
     transform: translateY(-4px);
-    box-shadow: 0 16px 40px rgba(91,140,255,0.12);
   }
 
   .badge:hover {
@@ -396,10 +451,10 @@
   }
 
   .category-grid .card:nth-child(2),
-  .feature-list .card:nth-child(2) { transition-delay: 0.08s; }
+  .feature-list .card:nth-child(2) { transition-delay: 0.06s; }
   .category-grid .card:nth-child(3),
-  .feature-list .card:nth-child(3) { transition-delay: 0.16s; }
-  .feature-list .card:nth-child(4) { transition-delay: 0.24s; }
+  .feature-list .card:nth-child(3) { transition-delay: 0.12s; }
+  .feature-list .card:nth-child(4) { transition-delay: 0.18s; }
 </style>
 </head>
 <body>
@@ -407,7 +462,7 @@
 <nav class="topnav">
   <a href="#" class="brand">ToyRadar</a>
   <div class="nav-item">
-    <a href="#categories">品類</a>
+    <a href="#categories">品相</a>
     <div class="dropdown">
       <a href="#beyblade">Beyblade</a>
       <a href="#pokemon-tcg">Pokémon TCG</a>
@@ -421,11 +476,27 @@
       <a href="#auto-notify">自動化通知服務</a>
       <a href="#community">收藏交流社群</a>
       <a href="#market-insight">市場資訊整合</a>
+      <a href="#intl-shipping">國際寄送服務</a>
+      <a href="#warehousing">專業倉儲管理</a>
     </div>
   </div>
   <a href="#about">我們是誰</a>
-  <a href="#pricing">訂閱方案</a>
-  <a href="#faq">FAQ</a>
+  <div class="nav-item">
+    <a href="#pricing">訂閱方案</a>
+    <div class="dropdown">
+      <a href="#discord-login">使用 Discord 登入訂閱</a>
+      <a href="#waitlist-form">候補名單卡位</a>
+    </div>
+  </div>
+  <div class="nav-item">
+    <a href="#faq">FAQ</a>
+    <div class="dropdown">
+      <a href="#faq-onepiece-lottery">One Piece TCG 抽選</a>
+      <a href="#faq-pokemon-preorder">Pokémon TCG 預購</a>
+      <a href="#faq-beyblade-where">Beyblade 哪裡買</a>
+      <a href="#faq-discord-timing">加入 Discord 時機</a>
+    </div>
+  </div>
 </nav>
 <div class="page-overlay"></div>
 
@@ -443,17 +514,26 @@
 
 <section id="categories">
   <div class="wrap">
-    <h2 class="reveal">我們涵蓋的品類</h2>
+    <h2 class="reveal">我們服務的品相</h2>
     <div class="category-grid">
       <div class="card reveal" id="beyblade">
+        <div class="icon-badge">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3.2"/><path d="M12 3v3.2M12 17.8V21M3 12h3.2M17.8 12H21"/></svg>
+        </div>
         <h3>Beyblade</h3>
         <p>Beyblade 新品發售通路分散，各零售商上架時間不一致。ToyRadar 監控庫存變化，第一時間通知上架與到貨消息。</p>
       </div>
       <div class="card reveal" id="pokemon-tcg">
+        <div class="icon-badge">
+          <svg viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="2.4"/><path d="M8 8h8M8 12h8M8 16h5"/></svg>
+        </div>
         <h3>Pokémon TCG</h3>
         <p>Pokemon trading card game 熱門商品經常秒殺完售。ToyRadar 整理 pokémon tcg trading card game 各通路預購資訊，減少錯過的機會。</p>
       </div>
       <div class="card reveal" id="onepiece-tcg">
+        <div class="icon-badge">
+          <svg viewBox="0 0 24 24"><path d="M4 18c3-1 5-3 8-3s5 2 8 3"/><circle cx="12" cy="8" r="4.2"/><path d="M9.4 7.2c.6.6 1.6.6 2.2 0M14.6 7.2c-.6.6-1.6.6-2.2 0"/></svg>
+        </div>
         <h3>One Piece TCG</h3>
         <p>One piece trading card game 限量商品常採抽選制。ToyRadar 整理 one piece tcg 各通路的抽選時間與參加方式。</p>
       </div>
@@ -464,22 +544,48 @@
 <section id="features">
   <div class="wrap">
     <h2 class="reveal">我們的服務內容</h2>
-    <div class="feature-list grid-2x2">
+    <div class="feature-list">
       <div class="card reveal" id="realtime-alerts">
-        <h3>🎯 即時情報通知</h3>
+        <div class="icon-badge">
+          <svg viewBox="0 0 24 24"><path d="M12 3a5 5 0 0 0-5 5v3.6L5 15h14l-2-3.4V8a5 5 0 0 0-5-5Z"/><path d="M10 19a2 2 0 0 0 4 0"/></svg>
+        </div>
+        <h3>即時情報通知</h3>
         <p>澳洲、台灣及海外通路補貨通知<br>限量商品發售消息<br>預購、抽選、發售資訊整理<br>各大零售商即時庫存監控</p>
       </div>
       <div class="card reveal" id="auto-notify">
-        <h3>🤖 自動化通知服務</h3>
+        <div class="icon-badge">
+          <svg viewBox="0 0 24 24"><rect x="4" y="8" width="16" height="11" rx="2.4"/><path d="M12 8V4.6M9 4h6"/><circle cx="9" cy="13.2" r="1.1"/><circle cx="15" cy="13.2" r="1.1"/><path d="M9 17h6"/></svg>
+        </div>
+        <h3>自動化通知服務</h3>
         <p>透過自建機器人系統：<br>即時補貨提醒<br>商品價格變化通知<br>新品上架推播<br>客製化關鍵字追蹤</p>
       </div>
       <div class="card reveal" id="community">
-        <h3>🧸 收藏交流社群</h3>
+        <div class="icon-badge">
+          <svg viewBox="0 0 24 24"><path d="M21 12c0 4.14-4.03 7.5-9 7.5-1.2 0-2.34-.2-3.38-.55L4 20l1.2-3.6C4.15 15.03 3.5 13.58 3.5 12 3.5 7.86 7.53 4.5 12.5 4.5S21 7.86 21 12Z"/></svg>
+        </div>
+        <h3>收藏交流社群</h3>
         <p>分享收藏<br>討論市場資訊<br>交流購買經驗<br>找尋代購與通路情報</p>
       </div>
       <div class="card reveal" id="market-insight">
-        <h3>📈 市場資訊整合</h3>
+        <div class="icon-badge">
+          <svg viewBox="0 0 24 24"><path d="M4 19V5M4 19h16"/><path d="M7.5 16v-4.5M12 16V8M16.5 16v-7"/></svg>
+        </div>
+        <h3>市場資訊整合</h3>
         <p>熱門玩具<br>寶可夢卡牌<br>潮玩公仔<br>海外通路資訊<br>市場趨勢分析</p>
+      </div>
+      <div class="card reveal" id="intl-shipping">
+        <div class="icon-badge">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.4 2.4 3.7 5.6 3.7 9s-1.3 6.6-3.7 9c-2.4-2.4-3.7-5.6-3.7-9s1.3-6.6 3.7-9Z"/></svg>
+        </div>
+        <h3>國際寄送服務</h3>
+        <p>無論你在世界哪個角落都能收到。</p>
+      </div>
+      <div class="card reveal" id="warehousing">
+        <div class="icon-badge">
+          <svg viewBox="0 0 24 24"><path d="M3 10 12 4l9 6v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1Z"/><path d="M9 20v-6h6v6"/></svg>
+        </div>
+        <h3>專業倉儲管理</h3>
+        <p>安心集貨、統一出貨。</p>
       </div>
     </div>
   </div>
@@ -488,19 +594,9 @@
 <section id="about">
   <div class="wrap">
     <h2 class="reveal">我們是誰</h2>
-    <p class="reveal about-intro">ToyToy 是一支來自台灣的澳洲團隊，致力於幫助每一位收藏愛好者，用最快的速度獲得第一手商品資訊。</p>
-
-    <div class="feature-list">
-      <div class="card reveal">
-        <h3>🌏 國際寄送服務</h3>
-        <p>無論你在世界哪個角落都能收到。</p>
-      </div>
-      <div class="card reveal">
-        <h3>🏭 專業倉儲管理</h3>
-        <p>安心集貨、統一出貨。</p>
-      </div>
-    </div>
-
+    <p class="reveal about-intro">每個蒐藏迷都懂那種捶心肝的感覺——盯著補貨頁面刷了一整個禮拜，結果就在上架的那 3 分鐘沒守住，眼睜睜看著心心念念的那款被秒殺完售。</p>
+    <p class="reveal about-intro">ToyRadar 就是從這樣的挫折長出來的。我們是一支橫跨台灣與澳洲的團隊，本身也是 Beyblade、Pokémon TCG、One Piece TCG 的蒐藏愛好者，受夠了每天守著十幾個網站刷新頁面，索性自己動手寫了一套系統，把「盯貨」這件事交給機器人，把時間還給真正重要的事——好好享受蒐藏的樂趣。</p>
+    <p class="reveal about-intro">現在，我們每天監控各大零售商的庫存與上架動態，把第一手情報整理好、即時推播給你，讓你不用再靠運氣蹲點，也不用再錯過任何一次補貨。</p>
     <p class="reveal about-closing">感謝你的加入。希望在我們的合作之下，每位夥伴都能更快獲得資訊、更少踩雷。<br>也祝你每次都能成功蹲到心目中的那款！</p>
   </div>
 </section>
@@ -513,11 +609,11 @@
       <div class="price">AUD $10<span> / 月</span></div>
       <p class="status-note">金流串接規劃中，正式開放付款訂閱時會第一時間通知你。訂閱完成後即可加入 ToyRadar Discord 群組，享 30 天免費試用。</p>
 
-      <a class="discord-btn" href="https://discord.com/oauth2/authorize?client_id=1519267896516415498&amp;redirect_uri=https%3A%2F%2Ftommy0809449.github.io%2Ftoyradar%2Fcallback.html&amp;response_type=code&amp;scope=identify">使用 Discord 登入訂閱</a>
+      <a class="discord-btn" id="discord-login" href="https://discord.com/oauth2/authorize?client_id=1519267896516415498&amp;redirect_uri=https%3A%2F%2Ftommy0809449.github.io%2Ftoyradar%2Fcallback.html&amp;response_type=code&amp;scope=identify">使用 Discord 登入訂閱</a>
 
       <p class="or-divider">或</p>
 
-      <form class="waitlist" action="https://formsubmit.co/lucifer880401@gmail.com" method="POST">
+      <form class="waitlist" id="waitlist-form" action="https://formsubmit.co/lucifer880401@gmail.com" method="POST">
         <input type="hidden" name="_subject" content="ToyRadar 候補名單新登記">
         <input type="hidden" name="_captcha" value="false">
         <input type="email" name="email" placeholder="你的 email" required>
@@ -531,22 +627,22 @@
   <div class="wrap">
     <h2 class="reveal">常見問題</h2>
 
-    <div class="faq-item reveal">
+    <div class="faq-item reveal" id="faq-onepiece-lottery">
       <h3>One Piece TCG 抽選是什麼？</h3>
       <p>抽選是零售商常見的限量商品販售方式，消費者先登記參加抽籤，中籤後才能購買。One Piece TCG 熱門商品經常採用抽選制，ToyRadar 會整理各通路的抽選時間與參加方式。</p>
     </div>
 
-    <div class="faq-item reveal">
+    <div class="faq-item reveal" id="faq-pokemon-preorder">
       <h3>Pokémon TCG 預購要注意什麼？</h3>
       <p>Pokemon TCG 熱門商品預購經常在數分鐘內額滿，建議提前確認開賣時間、付款方式與到貨時間。ToyRadar 會即時整理各大零售商的預購資訊。</p>
     </div>
 
-    <div class="faq-item reveal">
+    <div class="faq-item reveal" id="faq-beyblade-where">
       <h3>Beyblade 新品在哪裡買？</h3>
       <p>Beyblade 新品發售通路分散，官方通路與零售商上架時間常不一致。ToyRadar 監控各大零售商庫存變化，第一時間通知上架與到貨消息。</p>
     </div>
 
-    <div class="faq-item reveal">
+    <div class="faq-item reveal" id="faq-discord-timing">
       <h3>訂閱後多久可以加入 Discord？</h3>
       <p>完成訂閱後即可加入 ToyRadar 的 Discord 群組，享有 30 天免費試用，試用期間可完整使用情報整理與庫存監控服務。</p>
     </div>
@@ -574,8 +670,15 @@
         observer.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+  }, { threshold: 0, rootMargin: '0px 0px -8% 0px' });
   items.forEach(function (el) { observer.observe(el); });
+
+  // Safety net: never let content stay permanently hidden if the observer
+  // misses an element (fast scroll, resize race, headless capture, etc.).
+  window.setTimeout(function () {
+    items.forEach(function (el) { el.classList.add('in-view'); });
+    observer.disconnect();
+  }, 1800);
 })();
 </script>
 
