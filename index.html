@@ -58,10 +58,10 @@
     },
     {
       "@type": "Question",
-      "name": "訂閱後多久可以加入 Discord？",
+      "name": "免費會員跟 PRO 會員差在哪？",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "完成訂閱後即可加入 ToyRadar 的 Discord 群組，享有 30 天免費試用，試用期間可完整使用情報整理與庫存監控服務。"
+        "text": "免費加入就能逛收藏交流頻道、看情報預覽（延遲情報）。升級 PRO 才能解鎖各大零售商即時庫存/補貨通知、限量商品發售快訊、預購/抽選整理、每週市場趨勢與轉售行情比對。"
       }
     },
     {
@@ -69,7 +69,7 @@
       "name": "ToyRadar 訂閱費用多少？",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "ToyRadar 訂閱費用為 AUD $10 / 月，享有 30 天免費試用，試用期間可完整使用情報整理與庫存監控服務。"
+        "text": "加入 Discord 完全免費。PRO 會員費用為 AUD $10 / 月，享有 30 天免費試用，在群組內輸入 !subscribe 即可取得訂閱連結升級。"
       }
     },
     {
@@ -325,36 +325,79 @@
     text-align: center;
     font-style: italic;
   }
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    max-width: 900px;
+    margin: 0 auto;
+    align-items: stretch;
+  }
+  @media (max-width: 640px) {
+    .pricing-grid { grid-template-columns: 1fr; }
+  }
   .pricing-box {
     background: linear-gradient(180deg, var(--bg-card), var(--bg-alt));
     border: 1px solid var(--border);
     border-radius: 24px;
-    padding: clamp(32px, 5vw, 52px);
+    padding: clamp(28px, 4vw, 40px);
     text-align: center;
-    max-width: 520px;
-    margin: 0 auto;
     box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    display: flex;
+    flex-direction: column;
+  }
+  .pricing-box.pro { border-color: var(--accent); position: relative; }
+  .plan-badge {
+    position: absolute;
+    top: -14px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    color: #fff;
+    font-size: 0.78rem;
+    font-weight: 700;
+    padding: 5px 16px;
+    border-radius: 999px;
+    white-space: nowrap;
+  }
+  .plan-name {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 6px;
   }
   .price {
-    font-size: 2.8rem;
+    font-size: 2.4rem;
     font-weight: 700;
     letter-spacing: -0.02em;
-    margin: 10px 0;
+    margin: 6px 0 4px;
   }
   .price span { font-size: 1rem; color: var(--text-dim); font-weight: 400; }
   .trial-note {
     display: inline-block;
     background: rgba(91,140,255,0.15);
     color: var(--accent);
-    font-size: 0.9rem;
-    padding: 6px 14px;
+    font-size: 0.85rem;
+    padding: 5px 13px;
     border-radius: 999px;
-    margin-bottom: 20px;
+    margin-bottom: 8px;
   }
+  .plan-features {
+    list-style: none;
+    text-align: left;
+    color: var(--text-dim);
+    font-size: 0.92rem;
+    margin: 20px 0;
+    flex: 1;
+  }
+  .plan-features li {
+    padding: 7px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .plan-features li:last-child { border-bottom: none; }
   .status-note {
     color: var(--text-dim);
-    font-size: 0.9rem;
-    margin-top: 18px;
+    font-size: 0.85rem;
+    margin-top: 14px;
   }
   .discord-btn {
     display: inline-flex;
@@ -375,6 +418,24 @@
   .discord-btn:hover {
     transform: translateY(-2px) scale(1.02);
     box-shadow: 0 14px 36px rgba(91,140,255,0.45);
+  }
+  .discord-btn.outline {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text);
+    box-shadow: none;
+  }
+  .discord-btn.outline:hover {
+    border-color: var(--accent);
+    box-shadow: none;
+  }
+  .plan-features code,
+  .status-note code {
+    background: rgba(91,140,255,0.15);
+    color: var(--accent);
+    padding: 2px 6px;
+    border-radius: 5px;
+    font-size: 0.88em;
   }
   .hero-cta { margin-top: 4px; }
   .section-cta {
@@ -492,14 +553,14 @@
     </div>
   </div>
   <a href="#about">我們是誰</a>
-  <a href="#pricing" class="nav-cta">免費試用</a>
+  <a href="https://discord.gg/fRNef8E5d" class="nav-cta">免費加入</a>
   <div class="nav-item">
     <a href="#faq">FAQ</a>
     <div class="dropdown">
       <a href="#faq-onepiece-lottery">One Piece TCG 抽選</a>
       <a href="#faq-pokemon-preorder">Pokémon TCG 預購</a>
       <a href="#faq-beyblade-where">Beyblade 哪裡買</a>
-      <a href="#faq-discord-timing">加入 Discord 時機</a>
+      <a href="#faq-discord-timing">免費 vs PRO</a>
     </div>
   </div>
 </nav>
@@ -514,7 +575,7 @@
     </div>
     <h1>掌握 Beyblade、Pokémon TCG、One Piece TCG 第一手情報</h1>
     <p>ToyRadar 整理限量商品發售消息、預購與抽選資訊，同時監控台灣、澳洲兩地零售商庫存，不用自己每天刷網頁。</p>
-    <a href="#pricing" class="discord-btn hero-cta">免費試用 30 天</a>
+    <a href="https://discord.gg/fRNef8E5d" class="discord-btn hero-cta">免費加入 Discord</a>
   </div>
 </header>
 
@@ -544,7 +605,7 @@
         <p>One piece trading card game 限量商品常採抽選制。ToyRadar 整理 one piece tcg 各通路的抽選時間與參加方式。</p>
       </div>
     </div>
-    <p class="section-cta reveal">想搶先看到這些品項的補貨消息？<a href="#pricing">免費試用 30 天 →</a></p>
+    <p class="section-cta reveal">想搶先看到這些品項的補貨消息？<a href="#pricing">免費加入 Discord →</a></p>
   </div>
 </section>
 
@@ -595,7 +656,7 @@
         <p>安心集貨、統一出貨。</p>
       </div>
     </div>
-    <p class="section-cta reveal">這些功能現在就能開始用。<a href="#pricing">免費試用 30 天 →</a></p>
+    <p class="section-cta reveal">免費加入就能逛社群，升級 PRO 解鎖即時通知。<a href="#pricing">查看方案 →</a></p>
   </div>
 </section>
 
@@ -606,19 +667,38 @@
     <p class="reveal about-intro">ToyRadar 就是從這樣的挫折長出來的。我們是一支橫跨台灣與澳洲的團隊，本身也是 Beyblade、Pokémon TCG、One Piece TCG 的蒐藏愛好者，受夠了每天守著十幾個網站刷新頁面，索性自己動手寫了一套系統，把「盯貨」這件事交給機器人，把時間還給真正重要的事——好好享受蒐藏的樂趣。</p>
     <p class="reveal about-intro">現在，我們每天監控各大零售商的庫存與上架動態，把第一手情報整理好、即時推播給你，讓你不用再靠運氣蹲點，也不用再錯過任何一次補貨。</p>
     <p class="reveal about-closing">感謝你的加入。希望在我們的合作之下，每位夥伴都能更快獲得資訊、更少踩雷。<br>也祝你每次都能成功蹲到心目中的那款！</p>
-    <p class="section-cta reveal">準備好不再錯過下一次補貨了嗎？<a href="#pricing">免費試用 30 天 →</a></p>
+    <p class="section-cta reveal">準備好不再錯過下一次補貨了嗎？<a href="#pricing">免費加入 Discord →</a></p>
   </div>
 </section>
 
 <section id="pricing">
   <div class="wrap">
-    <h2 class="reveal">訂閱方案</h2>
-    <div class="pricing-box reveal">
-      <div class="trial-note">30 天免費試用</div>
-      <div class="price">AUD $10<span> / 月</span></div>
-      <p class="status-note">訂閱完成後即可加入 ToyRadar Discord 群組，享 30 天免費試用。</p>
-
-      <a class="discord-btn" id="discord-login" href="https://discord.com/oauth2/authorize?client_id=1519267896516415498&amp;redirect_uri=https%3A%2F%2Ftommy0809449.github.io%2Ftoyradar%2Fcallback.html&amp;response_type=code&amp;scope=identify">使用 Discord 登入訂閱</a>
+    <h2 class="reveal">免費加入．升級 PRO</h2>
+    <div class="pricing-grid">
+      <div class="pricing-box reveal">
+        <div class="plan-name">免費會員</div>
+        <div class="price">$0</div>
+        <ul class="plan-features">
+          <li>加入 ToyRadar Discord 社群</li>
+          <li>收藏交流頻道，分享心得、找代購</li>
+          <li>情報預覽頻道（延遲情報，先睹為快）</li>
+        </ul>
+        <a class="discord-btn outline" href="https://discord.gg/fRNef8E5d">免費加入 Discord</a>
+      </div>
+      <div class="pricing-box pro reveal">
+        <span class="plan-badge">完整情報</span>
+        <div class="plan-name">PRO 會員</div>
+        <div class="trial-note">30 天免費試用</div>
+        <div class="price">AUD $10<span> / 月</span></div>
+        <ul class="plan-features">
+          <li>各大零售商即時庫存/補貨通知</li>
+          <li>限量商品發售消息第一時間推播</li>
+          <li>預購／抽選資訊整理</li>
+          <li>每週市場趨勢＋轉售行情比對</li>
+          <li>客製化關鍵字追蹤</li>
+        </ul>
+        <p class="status-note">先免費加入 Discord，在群組內輸入 <code>!subscribe</code> 取得訂閱連結即可升級。</p>
+      </div>
     </div>
   </div>
 </section>
@@ -643,13 +723,13 @@
     </div>
 
     <div class="faq-item reveal" id="faq-discord-timing">
-      <h3>訂閱後多久可以加入 Discord？</h3>
-      <p>完成訂閱後即可加入 ToyRadar 的 Discord 群組，享有 30 天免費試用，試用期間可完整使用情報整理與庫存監控服務。</p>
+      <h3>免費會員跟 PRO 會員差在哪？</h3>
+      <p>免費加入就能逛收藏交流頻道、看情報預覽（延遲情報）。升級 PRO 才能解鎖各大零售商即時庫存/補貨通知、限量商品發售快訊、預購/抽選整理、每週市場趨勢與轉售行情比對。</p>
     </div>
 
     <div class="faq-item reveal" id="faq-pricing">
       <h3>ToyRadar 訂閱費用多少？</h3>
-      <p>ToyRadar 訂閱費用為 AUD $10 / 月，享有 30 天免費試用，試用期間可完整使用情報整理與庫存監控服務。</p>
+      <p>加入 Discord 完全免費。PRO 會員費用為 AUD $10 / 月，享有 30 天免費試用，在群組內輸入 <code>!subscribe</code> 即可取得訂閱連結升級。</p>
     </div>
 
     <div class="faq-item reveal" id="faq-difference">
