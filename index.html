@@ -462,14 +462,54 @@
   .topnav a.nav-cta:hover { color: #fff; opacity: 0.9; }
   .faq-item {
     max-width: 720px;
-    margin: 0 auto 28px;
-    padding-bottom: 28px;
+    margin: 0 auto 12px;
     border-bottom: 1px solid var(--border);
     scroll-margin-top: 68px;
   }
-  .faq-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
-  .faq-item h3 { font-size: 1.05rem; font-weight: 600; margin-bottom: 8px; }
-  .faq-item p { color: var(--text-dim); font-size: 0.95rem; }
+  .faq-item:last-child { border-bottom: none; }
+  .faq-item summary {
+    list-style: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 18px 4px;
+    font-size: 1.05rem;
+    font-weight: 600;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .faq-item summary::-webkit-details-marker { display: none; }
+  .faq-item summary::marker { content: ""; }
+  .faq-chevron {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    stroke: var(--text-dim);
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    transition: transform 0.3s cubic-bezier(0.16,1,0.3,1);
+  }
+  .faq-item[open] .faq-chevron { transform: rotate(180deg); }
+  .faq-item[open] summary { color: var(--accent); }
+  .faq-item:not([open]) > .faq-answer-wrap {
+    display: grid;
+    grid-template-rows: 0fr;
+  }
+  .faq-item > .faq-answer-wrap {
+    display: grid;
+    grid-template-rows: 1fr;
+    transition: grid-template-rows 0.35s cubic-bezier(0.16,1,0.3,1);
+  }
+  .faq-answer-wrap > p {
+    overflow: hidden;
+    color: var(--text-dim);
+    font-size: 0.95rem;
+    margin: 0;
+    padding: 0 4px 20px;
+  }
   footer {
     padding: 48px 0 64px;
     text-align: center;
@@ -707,40 +747,40 @@
   <div class="wrap">
     <h2 class="reveal">常見問題</h2>
 
-    <div class="faq-item reveal" id="faq-onepiece-lottery">
-      <h3>One Piece TCG 抽選是什麼？</h3>
-      <p>抽選是零售商常見的限量商品販售方式，消費者先登記參加抽籤，中籤後才能購買。One Piece TCG 熱門商品經常採用抽選制，ToyRadar 會整理各通路的抽選時間與參加方式。</p>
-    </div>
+    <details class="faq-item reveal" id="faq-onepiece-lottery">
+      <summary>One Piece TCG 抽選是什麼？<svg class="faq-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="faq-answer-wrap"><p>抽選是零售商常見的限量商品販售方式，消費者先登記參加抽籤，中籤後才能購買。One Piece TCG 熱門商品經常採用抽選制，ToyRadar 會整理各通路的抽選時間與參加方式。</p></div>
+    </details>
 
-    <div class="faq-item reveal" id="faq-pokemon-preorder">
-      <h3>Pokémon TCG 預購要注意什麼？</h3>
-      <p>Pokemon TCG 熱門商品預購經常在數分鐘內額滿，建議提前確認開賣時間、付款方式與到貨時間。ToyRadar 會即時整理各大零售商的預購資訊。</p>
-    </div>
+    <details class="faq-item reveal" id="faq-pokemon-preorder">
+      <summary>Pokémon TCG 預購要注意什麼？<svg class="faq-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="faq-answer-wrap"><p>Pokemon TCG 熱門商品預購經常在數分鐘內額滿，建議提前確認開賣時間、付款方式與到貨時間。ToyRadar 會即時整理各大零售商的預購資訊。</p></div>
+    </details>
 
-    <div class="faq-item reveal" id="faq-beyblade-where">
-      <h3>Beyblade 新品在哪裡買？</h3>
-      <p>Beyblade 新品發售通路分散，官方通路與零售商上架時間常不一致。ToyRadar 監控各大零售商庫存變化，第一時間通知上架與到貨消息。</p>
-    </div>
+    <details class="faq-item reveal" id="faq-beyblade-where">
+      <summary>Beyblade 新品在哪裡買？<svg class="faq-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="faq-answer-wrap"><p>Beyblade 新品發售通路分散，官方通路與零售商上架時間常不一致。ToyRadar 監控各大零售商庫存變化，第一時間通知上架與到貨消息。</p></div>
+    </details>
 
-    <div class="faq-item reveal" id="faq-discord-timing">
-      <h3>免費會員跟 PRO 會員差在哪？</h3>
-      <p>免費加入就能逛收藏交流頻道、看情報預覽（延遲情報）。升級 PRO 才能解鎖各大零售商即時庫存/補貨通知、限量商品發售快訊、預購/抽選整理、每週市場趨勢與轉售行情比對。</p>
-    </div>
+    <details class="faq-item reveal" id="faq-discord-timing">
+      <summary>免費會員跟 PRO 會員差在哪？<svg class="faq-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="faq-answer-wrap"><p>免費加入就能逛收藏交流頻道、看情報預覽（延遲情報）。升級 PRO 才能解鎖各大零售商即時庫存/補貨通知、限量商品發售快訊、預購/抽選整理、每週市場趨勢與轉售行情比對。</p></div>
+    </details>
 
-    <div class="faq-item reveal" id="faq-pricing">
-      <h3>ToyRadar 訂閱費用多少？</h3>
-      <p>加入 Discord 完全免費。PRO 會員費用為 AUD $10 / 月，享有 30 天免費試用，在群組內輸入 <code>!subscribe</code> 即可取得訂閱連結升級。</p>
-    </div>
+    <details class="faq-item reveal" id="faq-pricing">
+      <summary>ToyRadar 訂閱費用多少？<svg class="faq-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="faq-answer-wrap"><p>加入 Discord 完全免費。PRO 會員費用為 AUD $10 / 月，享有 30 天免費試用，在群組內輸入 <code>!subscribe</code> 即可取得訂閱連結升級。</p></div>
+    </details>
 
-    <div class="faq-item reveal" id="faq-difference">
-      <h3>ToyRadar 跟其他 Beyblade 情報站有什麼不同？</h3>
-      <p>ToyRadar 同時監控台灣與澳洲兩地的零售通路，一次訂閱涵蓋 Beyblade、Pokémon TCG、One Piece TCG 三個品類，不用分別追蹤好幾個不同的社群或網站。</p>
-    </div>
+    <details class="faq-item reveal" id="faq-difference">
+      <summary>ToyRadar 跟其他 Beyblade 情報站有什麼不同？<svg class="faq-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="faq-answer-wrap"><p>ToyRadar 同時監控台灣與澳洲兩地的零售通路，一次訂閱涵蓋 Beyblade、Pokémon TCG、One Piece TCG 三個品類，不用分別追蹤好幾個不同的社群或網站。</p></div>
+    </details>
 
-    <div class="faq-item reveal" id="faq-overseas">
-      <h3>海外的收藏玩家或代購可以用 ToyRadar 嗎？</h3>
-      <p>可以。ToyRadar 同時監控澳洲與台灣兩地通路的上架與庫存動態，適合想掌握海外情報、或跨境代購的玩家。</p>
-    </div>
+    <details class="faq-item reveal" id="faq-overseas">
+      <summary>海外的收藏玩家或代購可以用 ToyRadar 嗎？<svg class="faq-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="faq-answer-wrap"><p>可以。ToyRadar 同時監控澳洲與台灣兩地通路的上架與庫存動態，適合想掌握海外情報、或跨境代購的玩家。</p></div>
+    </details>
   </div>
 </section>
 
