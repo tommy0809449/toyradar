@@ -393,8 +393,9 @@
     box-shadow: 0 20px 60px rgba(0,0,0,0.3);
     display: flex;
     flex-direction: column;
+    position: relative;
   }
-  .pricing-box.pro { border-color: var(--accent); position: relative; }
+  .pricing-box.pro { border-color: var(--accent); }
   .plan-badge {
     position: absolute;
     top: -14px;
@@ -407,6 +408,11 @@
     padding: 5px 16px;
     border-radius: 999px;
     white-space: nowrap;
+  }
+  .plan-badge.free {
+    background: var(--bg-alt);
+    border: 1px solid var(--border);
+    color: var(--text-dim);
   }
   .plan-name {
     font-size: 1.2rem;
@@ -778,6 +784,7 @@
     <h2 class="reveal">免費加入．升級 PRO</h2>
     <div class="pricing-grid">
       <div class="pricing-box reveal">
+        <span class="plan-badge free">看看不用錢，喜歡再加入！</span>
         <div class="plan-name">免費會員</div>
         <div class="price">$0</div>
         <ul class="plan-features">
@@ -789,7 +796,7 @@
         <p class="upgrade-note">群組內打 <code>!subscribe</code> 即可升級</p>
       </div>
       <div class="pricing-box pro reveal">
-        <span class="plan-badge">完整情報</span>
+        <span class="plan-badge">完整情報，馬上知道！</span>
         <div class="plan-name">PRO 會員</div>
         <div class="trial-note">30 天免費試用</div>
         <div class="price">AUD $10<span> / 月</span></div>
