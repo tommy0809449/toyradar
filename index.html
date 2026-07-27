@@ -69,7 +69,7 @@
       "name": "ToyRadar 訂閱費用多少？",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "加入 Discord 完全免費。PRO 會員費用為 AUD $10 / 月，享有 30 天免費試用，在群組內輸入 !subscribe 即可取得訂閱連結升級。"
+        "text": "加入 Discord 完全免費。PRO 會員費用為 AUD $10 / 月（約 NT$220，依匯率變動），享有 30 天免費試用，在群組內輸入 !subscribe 即可取得訂閱連結升級。"
       }
     },
     {
@@ -435,6 +435,20 @@
     border-radius: 999px;
     margin: 10px 0 8px;
   }
+  .price-note {
+    color: var(--text-dim);
+    font-size: 0.82rem;
+    margin-top: -8px;
+  }
+  .pricing-howto {
+    max-width: 640px;
+    margin: 36px auto 0;
+    text-align: center;
+    color: var(--text-dim);
+    font-size: 0.92rem;
+    line-height: 1.7;
+  }
+  .pricing-howto strong { color: var(--text); }
   .plan-features {
     list-style: none;
     text-align: left;
@@ -577,6 +591,19 @@
     color: var(--text-dim);
     font-size: 0.9rem;
   }
+  .footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 12px;
+  }
+  .footer-links a {
+    color: var(--text-dim);
+    text-decoration: none;
+    font-size: 0.85rem;
+  }
+  .footer-links a:hover { color: var(--accent); }
 
   @media (prefers-reduced-motion: no-preference) {
     header.hero .badge-row,
@@ -703,17 +730,17 @@
           <svg viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="2.4"/><path d="M8 8h8M8 12h8M8 16h5"/></svg>
         </div>
         <h3>Pokémon TCG</h3>
-        <p>Pokemon trading card game 熱門商品經常秒殺完售。ToyRadar 整理 pokémon tcg trading card game 各通路預購資訊，減少錯過的機會。</p>
+        <p>Pokémon TCG 熱門商品經常在幾分鐘內秒殺完售。ToyRadar 整理各通路的預購資訊與開賣時間，減少錯過的機會。</p>
       </div>
       <div class="card reveal" id="onepiece-tcg">
         <div class="icon-badge">
           <svg viewBox="0 0 24 24"><path d="M4 18c3-1 5-3 8-3s5 2 8 3"/><circle cx="12" cy="8" r="4.2"/><path d="M9.4 7.2c.6.6 1.6.6 2.2 0M14.6 7.2c-.6.6-1.6.6-2.2 0"/></svg>
         </div>
         <h3>One Piece TCG</h3>
-        <p>One piece trading card game 限量商品常採抽選制。ToyRadar 整理 one piece tcg 各通路的抽選時間與參加方式。</p>
+        <p>One Piece TCG 限量商品常採抽選制販售。ToyRadar 整理各通路的抽選時間與參加方式，不錯過報名期限。</p>
       </div>
     </div>
-    <p class="section-cta reveal">想搶先看到這些品項的補貨消息？<a href="#pricing">免費加入 Discord →</a></p>
+    <p class="section-cta reveal">想搶先看到這些品項的補貨消息？<a href="#pricing">查看方案 →</a></p>
   </div>
 </section>
 
@@ -775,7 +802,7 @@
     <p class="reveal about-intro">ToyRadar 就是從這樣的挫折長出來的。我們是一支橫跨台灣與澳洲的團隊，本身也是 Beyblade、Pokémon TCG、One Piece TCG 的蒐藏愛好者，受夠了每天守著十幾個網站刷新頁面，索性自己動手寫了一套系統，把「盯貨」這件事交給機器人，把時間還給真正重要的事——好好享受蒐藏的樂趣。</p>
     <p class="reveal about-intro">現在，我們每天監控各大零售商的庫存與上架動態，把第一手情報整理好、即時推播給你，讓你不用再靠運氣蹲點，也不用再錯過任何一次補貨。</p>
     <p class="reveal about-closing">感謝你的加入。希望在我們的合作之下，每位夥伴都能更快獲得資訊、更少踩雷。<br>也祝你每次都能成功蹲到心目中的那款！</p>
-    <p class="section-cta reveal">準備好不再錯過下一次補貨了嗎？<a href="#pricing">免費加入 Discord →</a></p>
+    <p class="section-cta reveal">準備好不再錯過下一次補貨了嗎？<a href="#pricing">了解 PRO 會員 →</a></p>
   </div>
 </section>
 
@@ -799,6 +826,7 @@
         <span class="plan-badge"></span>
         <div class="plan-name">PRO 會員</div>
         <div class="price">AUD $10<span> / 月</span></div>
+        <p class="price-note">約 NT$220 / 月（實際依當下匯率為準）</p>
         <div class="trial-note">30 天免費試用</div>
         <ul class="plan-features">
           <li>各大零售商即時庫存/補貨通知</li>
@@ -811,6 +839,7 @@
         <p class="upgrade-note">完整情報，馬上知道！</p>
       </div>
     </div>
+    <p class="pricing-howto reveal">💬 <strong>怎麼升級 PRO？</strong>點上面任一個按鈕免費加入 Discord，加入後在群組任一頻道輸入 <code>!subscribe</code>，機器人會私訊你專屬付款連結，完成付款後自動解鎖 PRO 身分組，30 天內都不滿意可以隨時取消，不會再扣下一期。</p>
   </div>
 </section>
 
@@ -840,7 +869,7 @@
 
     <details class="faq-item reveal" id="faq-pricing">
       <summary>ToyRadar 訂閱費用多少？<svg class="faq-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></summary>
-      <div class="faq-answer-wrap"><p>加入 Discord 完全免費。PRO 會員費用為 AUD $10 / 月，享有 30 天免費試用，在群組內輸入 <code>!subscribe</code> 即可取得訂閱連結升級。</p></div>
+      <div class="faq-answer-wrap"><p>加入 Discord 完全免費。PRO 會員費用為 AUD $10 / 月（約 NT$220，依匯率變動），享有 30 天免費試用，在群組內輸入 <code>!subscribe</code> 即可取得訂閱連結升級。</p></div>
     </details>
 
     <details class="faq-item reveal" id="faq-difference">
@@ -858,6 +887,11 @@
 <footer>
   <div class="wrap">
     <p>ToyRadar © 2026</p>
+    <div class="footer-links">
+      <a href="/toyradar/terms.html">服務條款</a>
+      <a href="/toyradar/refund.html">退款政策</a>
+      <a href="/toyradar/privacy.html">隱私權政策</a>
+    </div>
   </div>
 </footer>
 
