@@ -345,6 +345,17 @@
     stroke-linejoin: round;
   }
   .card h3 { font-size: 1.15rem; font-weight: 600; margin-bottom: 10px; }
+  .coming-soon {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--text-dim);
+    border: 1px solid var(--border);
+    padding: 2px 9px;
+    border-radius: 999px;
+    vertical-align: middle;
+    margin-left: 4px;
+  }
   .card p { color: var(--text-dim); font-size: 0.95rem; }
 
   .feature-list {
@@ -438,12 +449,33 @@
   .pricing-howto {
     max-width: 640px;
     margin: 36px auto 0;
-    text-align: center;
+    text-align: left;
     color: var(--text-dim);
     font-size: 0.92rem;
     line-height: 1.7;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 24px 28px;
   }
+  .pricing-howto h4 {
+    color: var(--text);
+    font-size: 0.98rem;
+    margin-bottom: 12px;
+  }
+  .pricing-howto ol {
+    padding-left: 20px;
+    margin-bottom: 14px;
+  }
+  .pricing-howto li { margin-bottom: 6px; }
   .pricing-howto strong { color: var(--text); }
+  .pricing-howto .fineprint {
+    font-size: 0.82rem;
+    color: var(--text-dim);
+    border-top: 1px solid var(--border);
+    padding-top: 12px;
+    margin-top: 4px;
+  }
   .plan-features {
     list-style: none;
     text-align: left;
@@ -775,15 +807,15 @@
         <div class="icon-badge">
           <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.4 2.4 3.7 5.6 3.7 9s-1.3 6.6-3.7 9c-2.4-2.4-3.7-5.6-3.7-9s1.3-6.6 3.7-9Z"/></svg>
         </div>
-        <h3>國際寄送服務</h3>
-        <p>無論你在世界哪個角落都能收到。</p>
+        <h3>國際寄送服務 <span class="coming-soon">敬請期待</span></h3>
+        <p>規劃中的加值服務，細節（服務範圍、計費方式、時效）確定後會在這裡更新，目前尚未開放。</p>
       </div>
       <div class="card reveal" id="warehousing">
         <div class="icon-badge">
           <svg viewBox="0 0 24 24"><path d="M3 10 12 4l9 6v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1Z"/><path d="M9 20v-6h6v6"/></svg>
         </div>
-        <h3>專業倉儲管理</h3>
-        <p>安心集貨、統一出貨。</p>
+        <h3>專業倉儲管理 <span class="coming-soon">敬請期待</span></h3>
+        <p>規劃中的加值服務，細節（服務範圍、計費方式、責任歸屬）確定後會在這裡更新，目前尚未開放。</p>
       </div>
     </div>
     <p class="section-cta reveal">免費加入就能逛社群，升級 PRO 解鎖即時通知。<a href="#pricing">查看方案 →</a></p>
@@ -833,7 +865,16 @@
         <p class="upgrade-note">完整情報，馬上知道！</p>
       </div>
     </div>
-    <p class="pricing-howto reveal">💬 <strong>怎麼升級 PRO？</strong>點上面任一個按鈕免費加入 Discord，加入後在群組任一頻道輸入 <code>!subscribe</code>，機器人會私訊你專屬付款連結，完成付款後自動解鎖 PRO 身分組，30 天內都不滿意可以隨時取消，不會再扣下一期。</p>
+    <div class="pricing-howto reveal">
+      <h4>💬 怎麼升級 PRO？</h4>
+      <ol>
+        <li>點上面任一個按鈕，免費加入 Discord</li>
+        <li>加入後在群組任一頻道輸入 <code>!subscribe</code>，機器人會私訊你專屬付款連結</li>
+        <li>完成付款設定後開始 30 天免費試用，<strong>試用期間不會扣款</strong>，PRO 身分組立即解鎖</li>
+        <li>試用期滿後自動從你設定的付款方式扣款 NT$199 / 月；想在期滿前取消，私訊 Tommy 即可，取消後不會再扣下一期</li>
+      </ol>
+      <p class="fineprint">付款由第三方金流服務商處理，ToyRadar 不會接觸或儲存你的完整卡號。詳見<a href="/toyradar/terms.html" style="color:var(--accent)">服務條款</a>與<a href="/toyradar/refund.html" style="color:var(--accent)">退款政策</a>。</p>
+    </div>
   </div>
 </section>
 
@@ -937,26 +978,33 @@
     .then(function (r) { return r.ok ? r.json() : Promise.reject(new Error('bad status')); })
     .then(function (data) {
       var items = (data.items || []).slice(0, 6);
-      if (!items.length) return;
-
       var list = document.getElementById('activity-list');
-      items.forEach(function (item) {
-        var row = document.createElement('div');
-        row.className = 'activity-row';
-        row.innerHTML =
-          '<span class="activity-badge">' + (TYPE_LABEL[item.type] || item.type) + '</span>' +
-          '<span class="activity-name">' + escapeHtml(item.name) + '</span>' +
-          '<span class="activity-source">' + escapeHtml(item.source) + '</span>' +
-          '<span class="activity-time">' + relativeTime(item.timestamp) + '</span>';
-        list.appendChild(row);
-      });
+
+      if (!items.length) {
+        // 服務有回應,只是最近沒有新變化——照實說「監控中」,不要整區隱藏假裝沒這個功能
+        var empty = document.createElement('div');
+        empty.className = 'activity-row';
+        empty.innerHTML = '<span class="activity-name" style="color:var(--text-dim)">✅ 監控中，目前沒有新的上架/補貨變化，有動態會馬上出現在這裡</span>';
+        list.appendChild(empty);
+      } else {
+        items.forEach(function (item) {
+          var row = document.createElement('div');
+          row.className = 'activity-row';
+          row.innerHTML =
+            '<span class="activity-badge">' + (TYPE_LABEL[item.type] || item.type) + '</span>' +
+            '<span class="activity-name">' + escapeHtml(item.name) + '</span>' +
+            '<span class="activity-source">' + escapeHtml(item.source) + '</span>' +
+            '<span class="activity-time">' + relativeTime(item.timestamp) + '</span>';
+          list.appendChild(row);
+        });
+      }
 
       var section = document.getElementById('recent-activity');
       section.style.display = '';
       section.classList.add('in-view');
     })
     .catch(function () {
-      // 拿不到資料就保持隱藏,不要顯示壞掉或空白的區塊
+      // 服務真的連不上才隱藏,這是技術性失敗,跟「沒有新資料」是兩回事
     });
 })();
 </script>
