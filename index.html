@@ -268,54 +268,6 @@
     text-align: center;
     margin-bottom: 48px;
   }
-  #recent-activity { padding-top: 0; padding-bottom: clamp(48px, 8vw, 88px); }
-  #recent-activity h2 {
-    font-size: 1.05rem;
-    font-weight: 600;
-    color: var(--text-dim);
-    margin-bottom: 20px;
-  }
-  .activity-list {
-    max-width: 720px;
-    margin: 0 auto;
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    overflow: hidden;
-    background: var(--bg-card);
-  }
-  .activity-row {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 14px 18px;
-    border-bottom: 1px solid var(--border);
-    font-size: 0.9rem;
-  }
-  .activity-row:last-child { border-bottom: none; }
-  .activity-badge {
-    flex-shrink: 0;
-    font-size: 0.78rem;
-    padding: 4px 10px;
-    border-radius: 999px;
-    background: rgba(91,140,255,0.15);
-    color: var(--accent);
-    white-space: nowrap;
-  }
-  .activity-name {
-    flex: 1;
-    min-width: 0;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-  .activity-source, .activity-time {
-    flex-shrink: 0;
-    color: var(--text-dim);
-    font-size: 0.82rem;
-  }
-  @media (max-width: 560px) {
-    .activity-source { display: none; }
-  }
   .category-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -738,13 +690,6 @@
   </div>
 </header>
 
-<section id="recent-activity" class="reveal" style="display:none;">
-  <div class="wrap">
-    <h2>📡 最近偵測到的上架動態</h2>
-    <div class="activity-list" id="activity-list"></div>
-  </div>
-</section>
-
 <section id="categories">
   <div class="wrap">
     <h2 class="reveal">我們服務的品相</h2>
@@ -960,58 +905,6 @@
     items.forEach(function (el) { el.classList.add('in-view'); });
     observer.disconnect();
   }, 1800);
-})();
-</script>
-
-<script>
-(function () {
-  var TYPE_LABEL = { new: '🆕 新上架', restock: '🔄 補貨' };
-
-  function escapeHtml(s) {
-    var div = document.createElement('div');
-    div.textContent = s || '';
-    return div.innerHTML;
-  }
-
-  function relativeTime(iso) {
-    var diffSec = Math.max(0, (Date.now() - new Date(iso).getTime()) / 1000);
-    if (diffSec < 3600) return Math.max(1, Math.round(diffSec / 60)) + ' 分鐘前';
-    if (diffSec < 86400) return Math.round(diffSec / 3600) + ' 小時前';
-    return Math.round(diffSec / 86400) + ' 天前';
-  }
-
-  fetch('https://toyradar-payments-production.up.railway.app/activity')
-    .then(function (r) { return r.ok ? r.json() : Promise.reject(new Error('bad status')); })
-    .then(function (data) {
-      var items = (data.items || []).slice(0, 6);
-      var list = document.getElementById('activity-list');
-
-      if (!items.length) {
-        // 服務有回應,只是最近沒有新變化——照實說「監控中」,不要整區隱藏假裝沒這個功能
-        var empty = document.createElement('div');
-        empty.className = 'activity-row';
-        empty.innerHTML = '<span class="activity-name" style="color:var(--text-dim)">✅ 監控中，目前沒有新的上架/補貨變化，有動態會馬上出現在這裡</span>';
-        list.appendChild(empty);
-      } else {
-        items.forEach(function (item) {
-          var row = document.createElement('div');
-          row.className = 'activity-row';
-          row.innerHTML =
-            '<span class="activity-badge">' + (TYPE_LABEL[item.type] || item.type) + '</span>' +
-            '<span class="activity-name">' + escapeHtml(item.name) + '</span>' +
-            '<span class="activity-source">' + escapeHtml(item.source) + '</span>' +
-            '<span class="activity-time">' + relativeTime(item.timestamp) + '</span>';
-          list.appendChild(row);
-        });
-      }
-
-      var section = document.getElementById('recent-activity');
-      section.style.display = '';
-      section.classList.add('in-view');
-    })
-    .catch(function () {
-      // 服務真的連不上才隱藏,這是技術性失敗,跟「沒有新資料」是兩回事
-    });
 })();
 </script>
 
