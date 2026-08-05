@@ -210,19 +210,87 @@
   header.hero::before {
     content: "";
     position: absolute;
-    top: -220px;
+    top: -260px;
     left: 50%;
     transform: translateX(-50%);
-    width: 900px;
-    height: 560px;
+    width: 1100px;
+    height: 640px;
     background:
-      radial-gradient(closest-side, rgba(91,140,255,0.28), transparent),
-      radial-gradient(closest-side, rgba(143,107,255,0.22), transparent);
-    background-position: 30% 50%, 70% 60%;
+      radial-gradient(closest-side, rgba(91,140,255,0.32), transparent),
+      radial-gradient(closest-side, rgba(143,107,255,0.26), transparent),
+      radial-gradient(closest-side, rgba(255,159,91,0.14), transparent);
+    background-position: 25% 40%, 65% 55%, 50% 75%;
     background-repeat: no-repeat;
-    filter: blur(60px);
+    filter: blur(70px);
     pointer-events: none;
     z-index: 0;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    header.hero::before {
+      animation: heroFlow 18s ease-in-out infinite alternate;
+    }
+  }
+  @keyframes heroFlow {
+    0%   { background-position: 25% 40%, 65% 55%, 50% 75%; transform: translateX(-50%) rotate(0deg); }
+    50%  { background-position: 40% 30%, 55% 65%, 60% 60%; transform: translateX(-50%) rotate(4deg); }
+    100% { background-position: 30% 50%, 70% 45%, 45% 70%; transform: translateX(-50%) rotate(-3deg); }
+  }
+  .hero-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    border: 1px solid var(--border);
+    background: rgba(255,255,255,0.03);
+    color: var(--text-dim);
+    font-size: 0.82rem;
+    padding: 6px 14px 6px 10px;
+    border-radius: 999px;
+    margin-bottom: 22px;
+  }
+  .hero-status .dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: #5be08f;
+    box-shadow: 0 0 0 3px rgba(91,224,143,0.18);
+    flex-shrink: 0;
+  }
+  .hero-highlight {
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .hero-cta-group {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  @media (max-width: 480px) {
+    .hero-cta-group { flex-direction: column; align-items: stretch; }
+  }
+  .trust-row {
+    margin-top: 56px;
+    padding-top: 28px;
+    border-top: 1px solid var(--border);
+  }
+  .trust-row .trust-label {
+    font-size: 0.78rem;
+    color: var(--text-dim);
+    letter-spacing: 0.04em;
+    margin-bottom: 16px;
+  }
+  .trust-logos {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 24px;
+    opacity: 0.65;
+  }
+  .trust-logos span {
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: var(--text-dim);
+    letter-spacing: -0.01em;
   }
   header.hero .wrap { position: relative; z-index: 1; }
   header.hero h1 {
@@ -679,14 +747,29 @@
 
 <header class="hero">
   <div class="wrap">
+    <span class="hero-status"><span class="dot"></span>24/7 即時監控中</span>
     <div class="badge-row">
       <span class="badge">Beyblade</span>
       <span class="badge">Pokémon TCG</span>
       <span class="badge">One Piece TCG</span>
     </div>
-    <h1>限量商品不等人，你也不必再守著網頁刷新</h1>
+    <h1>限量商品不等人，你也不必再守著網頁<span class="hero-highlight">刷新</span></h1>
     <p>ToyRadar 即時監控 Beyblade、Pokémon TCG、One Piece TCG 各大零售商的美版庫存，上架、預購、抽選的第一時間，直接推播給你。</p>
-    <a href="https://discord.gg/fRNef8E5d" class="discord-btn hero-cta">免費加入 Discord</a>
+    <div class="hero-cta-group">
+      <a href="https://discord.gg/fRNef8E5d" class="discord-btn hero-cta">免費加入 Discord</a>
+      <a href="#features" class="discord-btn outline hero-cta">了解服務內容</a>
+    </div>
+    <div class="trust-row">
+      <p class="trust-label">即時監控中的零售通路</p>
+      <div class="trust-logos">
+        <span>Amazon</span>
+        <span>Target</span>
+        <span>Big W</span>
+        <span>JB Hi-Fi</span>
+        <span>Kmart</span>
+        <span>Myer</span>
+      </div>
+    </div>
   </div>
 </header>
 
