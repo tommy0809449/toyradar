@@ -12,6 +12,10 @@
 <link rel="icon" type="image/png" href="favicon-512.png">
 <link rel="apple-touch-icon" href="favicon-512.png">
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@1&display=swap" rel="stylesheet">
+
 <meta property="og:type" content="website">
 <meta property="og:title" content="ToyRadar｜Beyblade、Pokémon TCG、One Piece TCG 情報站">
 <meta property="og:description" content="限量商品發售消息、預購與抽選資訊整理，即時監控各大零售商庫存。">
@@ -94,14 +98,14 @@
 
 <style>
   :root {
-    --bg: #0a0b0d;
+    --bg: #0A0A0A;
     --bg-alt: #101216;
     --bg-card: #16181e;
-    --text: #f2f3f5;
-    --text-dim: #9aa0aa;
+    --text: #FFFFFF;
+    --text-dim: #9A9A9A;
     --accent: #5b8cff;
     --accent-2: #8f6bff;
-    --border: #24272f;
+    --border: rgba(255,255,255,0.08);
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
@@ -206,36 +210,37 @@
     padding: clamp(88px, 16vw, 168px) 0 clamp(64px, 10vw, 110px);
     text-align: center;
     overflow: hidden;
+    background: #0A0A0A;
   }
   header.hero::before {
     content: "";
     position: absolute;
-    top: -180px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 1500px;
-    height: 900px;
-    background:
+    inset: -10%;
+    background-image:
       radial-gradient(closest-side, rgba(91,140,255,0.75), transparent 70%),
       radial-gradient(closest-side, rgba(143,107,255,0.65), transparent 70%),
       radial-gradient(closest-side, rgba(255,140,90,0.5), transparent 70%),
       radial-gradient(closest-side, rgba(255,107,190,0.4), transparent 70%);
-    background-position: 20% 35%, 60% 30%, 75% 60%, 35% 65%;
     background-repeat: no-repeat;
+    background-position: 20% 35%, 60% 30%, 75% 60%, 35% 65%;
+    background-size: 60% 60%, 55% 55%, 50% 50%, 45% 45%;
     filter: blur(90px) saturate(150%);
     opacity: 0.85;
     pointer-events: none;
     z-index: 0;
+    animation: heroFlow 9s ease-in-out infinite alternate;
   }
-  @media (prefers-reduced-motion: no-preference) {
-    header.hero::before {
-      animation: heroFlow 9s ease-in-out infinite alternate;
-    }
+  header.hero > * {
+    position: relative;
+    z-index: 1;
   }
   @keyframes heroFlow {
-    0%   { background-position: 20% 35%, 60% 30%, 75% 60%, 35% 65%; transform: translateX(-50%) rotate(0deg) scale(1); }
-    50%  { background-position: 40% 20%, 45% 55%, 60% 75%, 55% 40%; transform: translateX(-50%) rotate(6deg) scale(1.08); }
-    100% { background-position: 30% 55%, 70% 25%, 45% 70%, 65% 55%; transform: translateX(-50%) rotate(-5deg) scale(1); }
+    0%   { background-position: 20% 35%, 60% 30%, 75% 60%, 35% 65%; }
+    50%  { background-position: 40% 45%, 40% 45%, 55% 40%, 55% 40%; }
+    100% { background-position: 30% 55%, 50% 25%, 65% 70%, 45% 30%; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    header.hero::before { animation: none; }
   }
   .hero-status {
     display: inline-flex;
@@ -256,6 +261,9 @@
     flex-shrink: 0;
   }
   .hero-highlight {
+    font-family: "Instrument Serif", serif;
+    font-style: italic;
+    font-weight: 400;
     background: linear-gradient(135deg, var(--accent), var(--accent-2));
     -webkit-background-clip: text;
     background-clip: text;
