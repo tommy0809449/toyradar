@@ -239,9 +239,6 @@
   }
   .hero-content { max-width: 600px; }
   .hero-highlight {
-    font-family: "Playfair Display", Georgia, serif;
-    font-style: italic;
-    font-weight: 600;
     background: linear-gradient(135deg, var(--accent), var(--accent-2));
     -webkit-background-clip: text;
     background-clip: text;
@@ -299,12 +296,16 @@
   }
   header.hero .wrap { position: relative; z-index: 1; }
   header.hero h1 {
-    font-size: clamp(2rem, 4.6vw, 3.1rem);
+    font-size: clamp(1.3rem, 3.1vw, 2.1rem);
     font-weight: 700;
     letter-spacing: -0.03em;
     line-height: 1.1;
     color: #FFFFFF;
     margin-bottom: 20px;
+    white-space: nowrap;
+  }
+  @media (max-width: 640px) {
+    header.hero h1 { white-space: normal; }
   }
   header.hero p {
     color: rgba(255,255,255,0.55);
@@ -746,7 +747,7 @@
 
 <div class="meta-strip">
   <div class="wrap">
-    <p class="hero-meta"><span class="dot"></span>24/7 即時監控中 · Beyblade · Pokémon TCG · One Piece TCG</p>
+    <p class="hero-meta"><span class="dot"></span>24/7 即時監控中 · 寶可夢 · 陀螺 · 航海王 · 火影忍者</p>
     <div class="trust-row">
       <p class="trust-label">即時監控中的零售通路</p>
       <div class="trust-logos">
