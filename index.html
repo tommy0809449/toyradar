@@ -14,7 +14,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 
 <meta property="og:type" content="website">
 <meta property="og:title" content="ToyRadar｜Beyblade、Pokémon TCG、One Piece TCG、Naruto TCG 情報站">
@@ -122,54 +122,61 @@
     background: var(--bg);
     color: var(--text);
     line-height: 1.7;
-    padding-top: 52px;
+    padding-top: 0;
     -webkit-font-smoothing: antialiased;
   }
   .wrap { max-width: 980px; margin: 0 auto; padding: 0 24px; }
 
   .topnav {
     position: fixed;
-    top: 0; left: 0; right: 0;
-    height: 52px;
+    top: 18px; left: 50%;
+    transform: translateX(-50%);
+    max-width: calc(100vw - 32px);
+    height: auto;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 30px;
-    background: rgba(10,11,13,0.72);
-    backdrop-filter: blur(20px) saturate(180%);
-    -webkit-backdrop-filter: blur(20px) saturate(180%);
-    border-bottom: 1px solid var(--border);
+    gap: 6px;
+    background: #161616;
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 999px;
     z-index: 100;
-    padding: 0 16px;
+    padding: 8px 16px;
   }
   @media (max-width: 700px) {
-    .topnav { overflow-x: auto; }
+    .topnav { overflow-x: auto; justify-content: flex-start; }
   }
   .topnav .brand {
     color: var(--text);
-    font-weight: 800;
+    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, "PingFang TC", "Microsoft JhengHei", sans-serif;
+    font-weight: 700;
     letter-spacing: -0.02em;
     text-decoration: none;
     font-size: 0.95rem;
-    margin-right: 14px;
+    margin-right: 10px;
     flex: 0 0 auto;
+    padding: 8px 10px;
   }
   .topnav a {
     color: var(--text-dim);
     text-decoration: none;
     font-size: 0.82rem;
     white-space: nowrap;
-    transition: color 0.2s ease;
+    transition: color 0.2s ease, background 0.2s ease;
+    padding: 8px 14px;
+    border-radius: 999px;
   }
-  .topnav a:hover { color: var(--text); }
+  .topnav a:hover { color: var(--text); background: rgba(255,255,255,0.08); }
   .nav-item {
     position: relative;
     flex: 0 0 auto;
-    padding: 16px 0;
+  }
+  .nav-item > a {
+    display: inline-block;
   }
   .dropdown {
     position: absolute;
-    top: 100%;
+    top: calc(100% + 10px);
     left: 50%;
     transform: translateX(-50%) translateY(-8px);
     background: var(--bg-card);
@@ -195,11 +202,11 @@
     border-radius: 999px;
     font-size: 0.85rem;
   }
-  .dropdown a:hover { background: rgba(91,140,255,0.12); color: var(--text); }
+  .dropdown a:hover { background: rgba(255,255,255,0.08); color: var(--text); }
 
   .page-overlay {
     position: fixed;
-    top: 52px; left: 0; right: 0; bottom: 0;
+    top: 0; left: 0; right: 0; bottom: 0;
     background: rgba(10,11,13,0.5);
     opacity: 0;
     pointer-events: none;
@@ -215,7 +222,7 @@
 
   header.hero {
     position: relative;
-    min-height: 100vh;
+    min-height: 92vh;
     display: flex;
     align-items: center;
     padding: clamp(100px, 12vw, 140px) 0 clamp(56px, 8vw, 90px);
@@ -227,7 +234,33 @@
     position: relative;
     z-index: 1;
   }
-  .hero-content { max-width: 600px; }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 55% 45%;
+    align-items: center;
+    gap: 32px;
+  }
+  @media (max-width: 860px) {
+    .hero-grid { grid-template-columns: 1fr; gap: 48px; }
+  }
+  .hero-content { max-width: 560px; }
+  .hero-visual {
+    display: flex;
+    justify-content: center;
+  }
+  .hero-visual img {
+    max-width: 460px;
+    width: 100%;
+    height: auto;
+    animation: heroFloat 4s ease-in-out infinite;
+  }
+  @media (max-width: 860px) {
+    .hero-visual img { max-width: 280px; }
+  }
+  @keyframes heroFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+  }
   .hero-highlight {
     color: inherit;
   }
@@ -283,29 +316,32 @@
   }
   header.hero .wrap { position: relative; z-index: 1; }
   header.hero h1 {
-    font-size: clamp(1.5rem, 3.8vw, 2.7rem);
+    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, "PingFang TC", "Microsoft JhengHei", sans-serif;
+    font-size: clamp(2.2rem, 4.6vw, 4.6rem);
     font-weight: 700;
-    letter-spacing: -0.03em;
-    line-height: 1.1;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
     color: #FFFFFF;
-    margin-bottom: 20px;
-    white-space: nowrap;
-  }
-  @media (max-width: 640px) {
-    header.hero h1 { white-space: normal; }
+    margin-bottom: 24px;
   }
   header.hero p {
-    color: rgba(255,255,255,0.55);
-    font-size: clamp(1rem, 1.6vw, 1.2rem);
+    color: rgba(255,255,255,0.6);
+    font-size: clamp(1rem, 1.1vw, 1.125rem);
+    line-height: 1.6;
+    max-width: 65%;
     margin-bottom: 32px;
+  }
+  @media (max-width: 860px) {
+    header.hero p { max-width: 100%; }
   }
   section {
     padding: clamp(64px, 11vw, 140px) 0;
   }
   section:nth-of-type(even) { background: var(--bg-alt); }
   section h2 {
+    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, "PingFang TC", "Microsoft JhengHei", sans-serif;
     font-size: clamp(1.7rem, 3.4vw, 2.6rem);
-    font-weight: 650;
+    font-weight: 700;
     letter-spacing: -0.02em;
     text-align: center;
     margin-bottom: 48px;
@@ -342,7 +378,7 @@
     stroke-linecap: round;
     stroke-linejoin: round;
   }
-  .card h3 { font-size: 1.15rem; font-weight: 600; margin-bottom: 10px; }
+  .card h3 { font-family: 'Poppins', -apple-system, BlinkMacSystemFont, "PingFang TC", "Microsoft JhengHei", sans-serif; font-size: 1.15rem; font-weight: 600; margin-bottom: 10px; }
   .coming-soon {
     display: inline-block;
     font-size: 0.7rem;
@@ -504,35 +540,35 @@
     align-items: center;
     justify-content: center;
     margin-top: 24px;
-    padding: 15px 34px;
+    padding: 14px 28px;
     border-radius: 999px;
-    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.15);
     color: #fff;
     text-decoration: none;
     font-weight: 600;
     font-size: 1rem;
-    box-shadow: 0 10px 30px rgba(91,140,255,0.35);
-    transition: all 0.4s cubic-bezier(0.16,1,0.3,1);
+    box-shadow: none;
+    transition: background 200ms ease;
     scroll-margin-top: 68px;
   }
   .discord-btn:hover {
-    transform: translateY(-2px) scale(1.02);
-    box-shadow: 0 14px 36px rgba(91,140,255,0.45);
+    background: rgba(255,255,255,0.1);
   }
   .discord-btn.outline {
-    background: transparent;
-    border: 1px solid var(--border);
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.15);
     color: var(--text);
     box-shadow: none;
   }
   .discord-btn.outline:hover {
-    border-color: var(--accent);
+    background: rgba(255,255,255,0.1);
     box-shadow: none;
   }
   .plan-features code,
   .status-note code {
-    background: rgba(91,140,255,0.15);
-    color: var(--accent);
+    background: rgba(255,255,255,0.08);
+    color: #fff;
     padding: 2px 6px;
     border-radius: 999px;
     font-size: 0.88em;
@@ -545,21 +581,22 @@
     font-size: 0.98rem;
   }
   .section-cta a {
-    color: var(--accent);
-    font-weight: 600;
-    text-decoration: none;
-    margin-left: 4px;
-    transition: color 0.2s ease;
-  }
-  .section-cta a:hover { color: var(--accent-2); }
-  .topnav a.nav-cta {
-    background: linear-gradient(135deg, var(--accent), var(--accent-2));
     color: #fff;
-    padding: 7px 16px;
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    margin-left: 4px;
+    transition: opacity 0.2s ease;
+  }
+  .section-cta a:hover { opacity: 0.7; }
+  .topnav a.nav-cta {
+    background: #ffffff;
+    color: #0a0a0a;
+    padding: 8px 18px;
     border-radius: 999px;
     font-weight: 600;
   }
-  .topnav a.nav-cta:hover { color: #fff; opacity: 0.9; }
+  .topnav a.nav-cta:hover { color: #0a0a0a; background: rgba(255,255,255,0.85); }
   .faq-item {
     max-width: 720px;
     margin: 0 auto 12px;
@@ -723,12 +760,17 @@
 
 <header class="hero">
   <div class="wrap">
-    <div class="hero-content">
-      <h1>限量商品不等人，你也不必再守著網頁<span class="hero-highlight">刷新</span></h1>
-      <p>ToyRadar 即時監控 Beyblade、Pokémon TCG、One Piece TCG、Naruto TCG 各大零售商的美版庫存，上架、預購、抽選的第一時間，直接推播給你。</p>
-      <div class="hero-cta-group">
-        <a href="https://discord.gg/fRNef8E5d" class="discord-btn hero-cta">免費加入 Discord</a>
-        <a href="#features" class="discord-btn outline hero-cta">了解服務內容</a>
+    <div class="hero-grid">
+      <div class="hero-content">
+        <h1>限量商品不等人，你也不必再守著網頁<span class="hero-highlight">刷新</span></h1>
+        <p>ToyRadar 即時監控 Beyblade、Pokémon TCG、One Piece TCG、Naruto TCG 各大零售商的美版庫存，上架、預購、抽選的第一時間，直接推播給你。</p>
+        <div class="hero-cta-group">
+          <a href="https://discord.gg/fRNef8E5d" class="discord-btn hero-cta">免費加入 Discord</a>
+          <a href="#features" class="discord-btn outline hero-cta">了解服務內容</a>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <img src="toytoy.webp" alt="ToyRadar 吉祥物 ToyToy" width="920" height="920">
       </div>
     </div>
   </div>
