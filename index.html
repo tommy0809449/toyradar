@@ -790,22 +790,23 @@
   }
   .contact-modal-overlay {
     position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.6);
-    display: none;
-    align-items: center;
-    justify-content: center;
+    right: 20px;
+    bottom: calc(25vh + 68px);
     z-index: 300;
-    padding: 20px;
+    display: none;
+    width: min(360px, calc(100vw - 40px));
   }
-  .contact-modal-overlay.is-open { display: flex; }
+  .contact-modal-overlay.is-open { display: block; }
   .contact-modal {
     width: 100%;
-    max-width: 420px;
-    background: var(--bg-card);
+    background: #08090b;
     border: 1px solid var(--border);
     border-radius: 20px;
-    padding: 28px;
+    padding: 24px;
+    box-shadow: 0 24px 60px rgba(0,0,0,0.55);
+  }
+  @media (max-width: 480px) {
+    .contact-modal-overlay { right: 20px; left: 20px; width: auto; }
   }
   .contact-modal h3 { font-size: 1.1rem; margin-bottom: 6px; }
   .contact-modal__hint { color: var(--text-dim); font-size: 0.82rem; margin-bottom: 18px; }
@@ -818,7 +819,7 @@
   .contact-modal input,
   .contact-modal textarea {
     width: 100%;
-    background: #0d0f13;
+    background: #17191f;
     border: 1px solid var(--border);
     border-radius: 10px;
     color: var(--text);
@@ -1179,10 +1180,19 @@
     statusEl.className = 'contact-modal__status';
   }
 
-  fabBtn.addEventListener('click', openModal);
+  fabBtn.addEventListener('click', function (e) {
+    e.stopPropagation();
+    if (overlay.classList.contains('is-open')) {
+      closeModal();
+    } else {
+      openModal();
+    }
+  });
   cancelBtn.addEventListener('click', closeModal);
-  overlay.addEventListener('click', function (e) {
-    if (e.target === overlay) closeModal();
+  document.addEventListener('click', function (e) {
+    if (!overlay.classList.contains('is-open')) return;
+    if (overlay.contains(e.target) || fabBtn.contains(e.target)) return;
+    closeModal();
   });
   document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape' && overlay.classList.contains('is-open')) closeModal();
