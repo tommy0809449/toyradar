@@ -122,14 +122,14 @@
     background: var(--bg);
     color: var(--text);
     line-height: 1.7;
-    padding-top: 0;
+    padding-top: 36px;
     -webkit-font-smoothing: antialiased;
   }
   .wrap { max-width: 980px; margin: 0 auto; padding: 0 24px; }
 
   .topnav {
     position: fixed;
-    top: 18px; left: 50%;
+    top: 54px; left: 50%;
     transform: translateX(-50%);
     max-width: calc(100vw - 32px);
     height: auto;
@@ -729,9 +729,134 @@
   .category-grid .card:nth-child(3),
   .feature-list .card:nth-child(3) { transition-delay: 0.12s; }
   .feature-list .card:nth-child(4) { transition-delay: 0.18s; }
+
+  /* 頂部跑馬燈公告 */
+  .marquee-bar {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: 36px;
+    background: #2a2a2a;
+    color: #fff;
+    overflow: hidden;
+    z-index: 200;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+  }
+  .marquee-bar__track {
+    display: inline-flex;
+    padding-left: 100%;
+    animation: marquee-scroll 22s linear infinite;
+  }
+  .marquee-bar__track span {
+    padding: 0 48px;
+    font-size: 0.8rem;
+    letter-spacing: 0.02em;
+  }
+  @keyframes marquee-scroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .marquee-bar__track { animation: none; padding-left: 16px; }
+  }
+
+  /* 聯絡客服：浮動按鈕 + 表單 */
+  .contact-fab {
+    position: fixed;
+    top: 75vh;
+    right: 20px;
+    transform: translateY(-50%);
+    z-index: 150;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: 999px;
+    padding: 14px 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.45);
+    transition: transform 0.2s ease;
+  }
+  .contact-fab:hover { transform: translateY(-50%) scale(1.05); }
+  @media (max-width: 700px) {
+    .contact-fab .contact-fab__label { display: none; }
+    .contact-fab { padding: 14px; }
+  }
+  .contact-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 300;
+    padding: 20px;
+  }
+  .contact-modal-overlay.is-open { display: flex; }
+  .contact-modal {
+    width: 100%;
+    max-width: 420px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 28px;
+  }
+  .contact-modal h3 { font-size: 1.1rem; margin-bottom: 6px; }
+  .contact-modal__hint { color: var(--text-dim); font-size: 0.82rem; margin-bottom: 18px; }
+  .contact-modal label {
+    display: block;
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    margin-bottom: 6px;
+  }
+  .contact-modal input,
+  .contact-modal textarea {
+    width: 100%;
+    background: #0d0f13;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    color: var(--text);
+    padding: 10px 12px;
+    font-size: 0.85rem;
+    font-family: inherit;
+    margin-bottom: 14px;
+  }
+  .contact-modal textarea { min-height: 110px; resize: vertical; }
+  .contact-modal .hp-field { position: absolute; left: -9999px; opacity: 0; height: 0; overflow: hidden; }
+  .contact-modal__actions { display: flex; gap: 10px; justify-content: flex-end; }
+  .contact-modal__btn {
+    border-radius: 999px;
+    padding: 10px 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    border: 1px solid rgba(255,255,255,0.15);
+  }
+  .contact-modal__btn--cancel { background: transparent; color: var(--text-dim); }
+  .contact-modal__btn--cancel:hover { color: var(--text); }
+  .contact-modal__btn--submit { background: var(--accent); color: #fff; border-color: transparent; }
+  .contact-modal__btn--submit:hover { background: #4a7bee; }
+  .contact-modal__btn--submit:disabled { opacity: 0.6; cursor: default; }
+  .contact-modal__status { font-size: 0.8rem; margin-top: 4px; min-height: 1.2em; }
+  .contact-modal__status.is-error { color: #ff6b6b; }
+  .contact-modal__status.is-success { color: #63e6be; }
 </style>
 </head>
 <body>
+
+<div class="marquee-bar" role="note" aria-label="最新公告">
+  <div class="marquee-bar__track">
+    <span>◆ 現在加入 Discord，體驗 30 天免費 PRO，不錯過任何限量商品快訊 ◆</span>
+    <span>◆ 現在加入 Discord，體驗 30 天免費 PRO，不錯過任何限量商品快訊 ◆</span>
+  </div>
+</div>
 
 <nav class="topnav">
   <a href="#" class="brand">toytoy</a>
@@ -1007,6 +1132,105 @@
     </div>
   </div>
 </footer>
+
+<button type="button" class="contact-fab" id="contactFabBtn" aria-haspopup="dialog" aria-controls="contactModalOverlay">
+  💬 <span class="contact-fab__label">聯絡客服</span>
+</button>
+
+<div class="contact-modal-overlay" id="contactModalOverlay">
+  <div class="contact-modal" role="dialog" aria-modal="true" aria-labelledby="contactModalTitle">
+    <h3 id="contactModalTitle">聯絡客服</h3>
+    <p class="contact-modal__hint">有問題想問我們？留言給我們，會盡快回覆你。</p>
+    <form id="contactForm" novalidate>
+      <label for="contactEmail">你的 email（選填，方便我們回覆你）</label>
+      <input type="email" id="contactEmail" name="email" placeholder="you@example.com">
+      <label for="contactMessage">訊息內容</label>
+      <textarea id="contactMessage" name="message" required placeholder="想問什麼都可以寫在這裡"></textarea>
+      <div class="hp-field" aria-hidden="true">
+        <label for="contactWebsite">Website</label>
+        <input type="text" id="contactWebsite" name="website" tabindex="-1" autocomplete="off">
+      </div>
+      <div class="contact-modal__status" id="contactStatus"></div>
+      <div class="contact-modal__actions">
+        <button type="button" class="contact-modal__btn contact-modal__btn--cancel" id="contactCancelBtn">取消</button>
+        <button type="submit" class="contact-modal__btn contact-modal__btn--submit" id="contactSubmitBtn">送出</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+(function () {
+  var CONTACT_API_URL = 'https://toytoy-contact-api-production.up.railway.app/contact';
+  var fabBtn = document.getElementById('contactFabBtn');
+  var overlay = document.getElementById('contactModalOverlay');
+  var cancelBtn = document.getElementById('contactCancelBtn');
+  var form = document.getElementById('contactForm');
+  var statusEl = document.getElementById('contactStatus');
+  var submitBtn = document.getElementById('contactSubmitBtn');
+
+  function openModal() {
+    overlay.classList.add('is-open');
+    document.getElementById('contactMessage').focus();
+  }
+  function closeModal() {
+    overlay.classList.remove('is-open');
+    statusEl.textContent = '';
+    statusEl.className = 'contact-modal__status';
+  }
+
+  fabBtn.addEventListener('click', openModal);
+  cancelBtn.addEventListener('click', closeModal);
+  overlay.addEventListener('click', function (e) {
+    if (e.target === overlay) closeModal();
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && overlay.classList.contains('is-open')) closeModal();
+  });
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var message = document.getElementById('contactMessage').value.trim();
+    if (!message) {
+      statusEl.textContent = '請先寫點內容再送出';
+      statusEl.className = 'contact-modal__status is-error';
+      return;
+    }
+    submitBtn.disabled = true;
+    statusEl.textContent = '送出中…';
+    statusEl.className = 'contact-modal__status';
+
+    fetch(CONTACT_API_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        message: message,
+        email: document.getElementById('contactEmail').value.trim(),
+        website: document.getElementById('contactWebsite').value
+      })
+    })
+      .then(function (res) { return res.json().then(function (data) { return { ok: res.ok, data: data }; }); })
+      .then(function (result) {
+        if (result.ok && result.data.ok) {
+          statusEl.textContent = '已送出，謝謝你！我們會盡快回覆。';
+          statusEl.className = 'contact-modal__status is-success';
+          form.reset();
+          window.setTimeout(closeModal, 1800);
+        } else {
+          statusEl.textContent = (result.data && result.data.error) || '送出失敗，請稍後再試';
+          statusEl.className = 'contact-modal__status is-error';
+        }
+      })
+      .catch(function () {
+        statusEl.textContent = '網路連線有問題，請稍後再試，或直接到 Discord 找我們';
+        statusEl.className = 'contact-modal__status is-error';
+      })
+      .finally(function () {
+        submitBtn.disabled = false;
+      });
+  });
+})();
+</script>
 
 <script>
 (function () {
