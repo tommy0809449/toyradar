@@ -771,7 +771,7 @@
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    background: var(--accent);
+    background: #2f4fc4;
     color: #fff;
     border: none;
     border-radius: 999px;
@@ -781,9 +781,9 @@
     font-family: inherit;
     cursor: pointer;
     box-shadow: 0 12px 30px rgba(0,0,0,0.45);
-    transition: transform 0.2s ease;
+    transition: transform 0.2s ease, background 0.2s ease;
   }
-  .contact-fab:hover { transform: translateY(-50%) scale(1.05); }
+  .contact-fab:hover { background: #26409e; transform: translateY(-50%) scale(1.05); }
   @media (max-width: 700px) {
     .contact-fab .contact-fab__label { display: none; }
     .contact-fab { padding: 14px; }
