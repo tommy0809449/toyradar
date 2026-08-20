@@ -446,8 +446,12 @@
     justify-content: center;
   }
   .pricing-box.info h3 {
-    font-size: 1.2rem;
+    font-size: 1.7rem;
     font-weight: 700;
+    letter-spacing: -0.01em;
+    min-height: 2.4em;
+    display: flex;
+    align-items: center;
     margin-bottom: 14px;
   }
   .pricing-box.info p {
@@ -470,27 +474,14 @@
     position: relative;
   }
   .pricing-box.pro { border-color: var(--accent); }
-  .plan-badge {
-    position: absolute;
-    top: -14px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: linear-gradient(135deg, var(--accent), var(--accent-2));
-    color: #fff;
-    font-size: 0.78rem;
-    font-weight: 700;
-    padding: 5px 16px;
-    border-radius: 999px;
-    white-space: nowrap;
-  }
-  .plan-badge.free {
-    background: var(--bg-alt);
-    border: 1px solid var(--border);
-    color: var(--text-dim);
-  }
   .plan-name {
-    font-size: 1.2rem;
+    font-size: 1.7rem;
     font-weight: 700;
+    letter-spacing: -0.01em;
+    min-height: 2.4em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     margin-bottom: 6px;
   }
   .price {
@@ -1064,8 +1055,7 @@
     <h2 class="reveal">免費加入．升級 PRO</h2>
     <div class="pricing-grid">
       <div class="pricing-box reveal">
-        <span class="plan-badge free">FREE</span>
-        <div class="plan-name">免費加入，自己找情報</div>
+        <div class="plan-name">FREE</div>
         <ul class="plan-features">
           <li>公開情報、商品消息</li>
           <li>收藏交流頻道，分享心得、找代購</li>
@@ -1074,8 +1064,7 @@
         <a class="discord-btn outline" href="https://discord.gg/fRNef8E5d">加入免費 Discord</a>
       </div>
       <div class="pricing-box pro reveal">
-        <span class="plan-badge">PRO</span>
-        <div class="plan-name">不用一直刷網站，重要情報主動通知你</div>
+        <div class="plan-name">PRO</div>
         <ul class="plan-features">
           <li>🔥 熱門商品</li>
           <li>⚡ 補貨通知</li>
@@ -1088,9 +1077,8 @@
       </div>
       <div class="pricing-box info reveal">
         <h3>你只需要決定一件事</h3>
-        <p>想自己慢慢找 → <strong>FREE</strong> 就夠。<br>不想錯過任何一次補貨 → 升級 <strong>PRO</strong>。</p>
-        <p>FREE 不用付款，加入就能用。PRO 不管是在這頁按「立即訂閱 PRO」，還是加入 Discord 之後在歡迎頻道按按鈕，兩條路最後都通往同一個付款頁——<strong>付款完成，Discord 身分組立刻自動解鎖</strong>，不用等人工處理。</p>
-        <p>不喜歡了隨時可以取消，不綁長約。</p>
+        <p>想自己找 → <strong>FREE</strong>。<br>不想錯過 → <strong>PRO</strong>。</p>
+        <p>網站或 Discord 歡迎頻道都能訂閱，<strong>付款完成立刻解鎖身分組</strong>，隨時可取消、不綁約。</p>
       </div>
     </div>
     <p class="fineprint pricing-fineprint">付款由第三方金流服務商處理，toytoy 不會接觸或儲存你的完整卡號。詳見<a href="/toytoy/terms.html" style="color:var(--accent)">服務條款</a>與<a href="/toytoy/refund.html" style="color:var(--accent)">退款政策</a>。</p>
