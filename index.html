@@ -432,15 +432,32 @@
   }
   .pricing-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 24px;
-    max-width: 900px;
+    max-width: 1080px;
     margin: 0 auto;
     align-items: stretch;
   }
-  @media (max-width: 640px) {
+  @media (max-width: 860px) {
     .pricing-grid { grid-template-columns: 1fr; }
   }
+  .pricing-box.info {
+    text-align: left;
+    justify-content: center;
+  }
+  .pricing-box.info h3 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 14px;
+  }
+  .pricing-box.info p {
+    color: var(--text-dim);
+    font-size: 0.92rem;
+    line-height: 1.75;
+    margin-bottom: 14px;
+  }
+  .pricing-box.info p:last-child { margin-bottom: 0; }
+  .pricing-box.info strong { color: var(--text); }
   .pricing-box {
     background: linear-gradient(180deg, var(--bg-card), var(--bg-alt));
     border: 1px solid var(--border);
@@ -521,6 +538,13 @@
     border-top: 1px solid var(--border);
     padding-top: 12px;
     margin-top: 4px;
+  }
+  .pricing-fineprint {
+    max-width: 640px;
+    margin: 28px auto 0;
+    text-align: center;
+    font-size: 0.82rem;
+    color: var(--text-dim);
   }
   .plan-features {
     list-style: none;
@@ -1040,42 +1064,36 @@
     <h2 class="reveal">免費加入．升級 PRO</h2>
     <div class="pricing-grid">
       <div class="pricing-box reveal">
-        <span class="plan-badge free"></span>
-        <div class="plan-name">入門收藏家</div>
-        <div class="price">$0</div>
+        <span class="plan-badge free">FREE</span>
+        <div class="plan-name">免費加入，自己找情報</div>
         <ul class="plan-features">
-          <li>加入 toytoy Discord 社群</li>
+          <li>公開情報、商品消息</li>
           <li>收藏交流頻道，分享心得、找代購</li>
-          <li>情報預覽頻道</li>
         </ul>
-        <a class="discord-btn outline" href="https://discord.gg/fRNef8E5d">免費加入</a>
-        <p class="upgrade-note">看看不用錢，喜歡再加入！</p>
+        <div class="price">NT$0<span> / 永久免費</span></div>
+        <a class="discord-btn outline" href="https://discord.gg/fRNef8E5d">加入免費 Discord</a>
       </div>
       <div class="pricing-box pro reveal">
-        <span class="plan-badge"></span>
-        <div class="plan-name">PRO 收藏家</div>
-        <div class="price">NT$99<span> / 月</span></div>
+        <span class="plan-badge">PRO</span>
+        <div class="plan-name">不用一直刷網站，重要情報主動通知你</div>
         <ul class="plan-features">
-          <li>各大零售商即時庫存/補貨通知</li>
-          <li>限量商品發售消息第一時間推播</li>
-          <li>預購／抽選資訊整理</li>
-          <li>每週市場趨勢＋轉售行情比對</li>
-          <li>客製化關鍵字追蹤</li>
+          <li>🔥 熱門商品</li>
+          <li>⚡ 補貨通知</li>
+          <li>🇦🇺 澳洲通路</li>
+          <li>🚨 搶購情報</li>
+          <li>💎 PRO 專屬內容</li>
         </ul>
-        <a class="discord-btn" href="https://discord.gg/fRNef8E5d">升級 PRO</a>
-        <p class="upgrade-note">完整情報，馬上知道！</p>
+        <div class="price">NT$99<span> / 月</span></div>
+        <a class="discord-btn" href="https://discord.gg/fRNef8E5d">💎 立即訂閱 PRO</a>
+      </div>
+      <div class="pricing-box info reveal">
+        <h3>你只需要決定一件事</h3>
+        <p>想自己慢慢找 → <strong>FREE</strong> 就夠。<br>不想錯過任何一次補貨 → 升級 <strong>PRO</strong>。</p>
+        <p>FREE 不用付款，加入就能用。PRO 不管是在這頁按「立即訂閱 PRO」，還是加入 Discord 之後在歡迎頻道按按鈕，兩條路最後都通往同一個付款頁——<strong>付款完成，Discord 身分組立刻自動解鎖</strong>，不用等人工處理。</p>
+        <p>不喜歡了隨時可以取消，不綁長約。</p>
       </div>
     </div>
-    <div class="pricing-howto reveal">
-      <h4>💬 怎麼升級 PRO？</h4>
-      <ol>
-        <li>點上面任一個按鈕，免費加入 Discord</li>
-        <li>加入後點歡迎頻道裡的「立即升級 PRO」按鈕，機器人會私訊你專屬付款連結</li>
-        <li>完成付款後 PRO 身分組立即解鎖，之後每月 NT$99 自動從你設定的付款方式扣款</li>
-        <li>想查看訂閱狀態或取消自動續訂，點「⚙️ 管理我的訂閱」按鈕自己處理，不用等真人回覆，取消後 PRO 可以用到當期結束才會收回</li>
-      </ol>
-      <p class="fineprint">付款由第三方金流服務商處理，toytoy 不會接觸或儲存你的完整卡號。詳見<a href="/toytoy/terms.html" style="color:var(--accent)">服務條款</a>與<a href="/toytoy/refund.html" style="color:var(--accent)">退款政策</a>。</p>
-    </div>
+    <p class="fineprint pricing-fineprint">付款由第三方金流服務商處理，toytoy 不會接觸或儲存你的完整卡號。詳見<a href="/toytoy/terms.html" style="color:var(--accent)">服務條款</a>與<a href="/toytoy/refund.html" style="color:var(--accent)">退款政策</a>。</p>
   </div>
 </section>
 
